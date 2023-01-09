@@ -9,6 +9,8 @@ export default function LinkDemo() {
       <Link to="/pricing">Pricing</Link>
       <Link to="/auth/signin">SignIn</Link>
       <Link to="/auth/signup">SignUp</Link>
+      <Link to="/dodge/table">Table</Link>
+      <Link to="/dodge/edit">Edit</Link>
     </Box>
   );
 }

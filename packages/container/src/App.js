@@ -12,6 +12,7 @@ import Header from './components/Header';
 const MarketingLazy = lazy(() => import('./layout'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const DashboardLazy = lazy(() => import('./components/DashboardApp'));
+const DodgetableLazy = lazy(() => import('./components/DodgeTable'));
 // const TestLazy = lazy(() => import('./components/AuthApp'))
 // const SidebarApp = lazy(() => import('./components/SidebarApp'));
 
@@ -23,6 +24,8 @@ const history = createBrowserHistory();
 
 export default () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const token = { accessToken:"123",  refreshToken: "456" }
 
   useEffect(() => {
     if (isSignedIn) {
@@ -43,6 +46,9 @@ export default () => {
               <Route path="/auth">
                 <AuthLazy onSignIn={() => setIsSignedIn(true)} />
               </Route>
+              <Route path="/dodge">
+                <DodgetableLazy token={token}/>
+            </Route>
               <Route path="/dashboard">
                 {!isSignedIn && <Redirect to="/" />}
                 <DashboardLazy />
