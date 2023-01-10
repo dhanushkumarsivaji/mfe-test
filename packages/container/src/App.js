@@ -1,9 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
-import {
-  StylesProvider,
-  createGenerateClassName,
-} from "@material-ui/core/styles";
 import { createBrowserHistory } from "history";
 
 import Progress from "./components/Progress";
@@ -19,9 +15,6 @@ const AuthPage = lazy(() => import("./components/apps/AuthApp"));
 const DashboardPage = lazy(() => import("./components/apps/DashboardApp"));
 const TablePage = lazy(() => import("./components/apps/DodgeTableApp"));
 
-const generateClassName = createGenerateClassName({
-  productionPrefix: "container",
-});
 
 const history = createBrowserHistory();
 
@@ -44,7 +37,6 @@ export default () => {
   return (
     <ErrorBoundary>
       <Router history={history}>
-        <StylesProvider generateClassName={generateClassName}>
           <div>
             <Header
               onSignOut={() => setIsSignedIn(false)}
@@ -55,7 +47,7 @@ export default () => {
                 <Route path="/auth">
                   <AuthPage onSignIn={() => setIsSignedIn(true)} />
                 </Route>
-                <AdminRoute path="/dashboard" component={DashboardPage} role={100} />
+                <AdminRoute path="/dashboard" component={DashboardPage} role={1001} />
                 <PrivateRoute
                   path="/dodge"
                   component={TablePage}
@@ -66,7 +58,6 @@ export default () => {
               </Switch>
             </Suspense>
           </div>
-        </StylesProvider>
       </Router>
     </ErrorBoundary>
   );
