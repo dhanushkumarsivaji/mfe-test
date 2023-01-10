@@ -6,6 +6,9 @@ import Edit from "./components/edit";
 export default ({ history, token }) => {
   return (
     <div>
+      <p style={{ display: "flex", justifyContent: "center" }}>
+        {JSON.stringify(token, null, 4)}
+      </p>
       <Router history={history}>
         <Switch>
           <Route path="/dodge/table" component={Table} />

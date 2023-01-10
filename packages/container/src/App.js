@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import {
   StylesProvider,
   createGenerateClassName,
@@ -10,16 +10,17 @@ import Progress from "./components/Progress";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
+import { PrivateRoute } from "./routes/privateRoute";
+import { AdminRoute } from "./routes/adminRoute";
 
-const HomePage = lazy(() => import("./layout"));
-const AuthPage = lazy(() => import("./components/AuthApp"));
-const DashboardPage = lazy(() => import("./components/DashboardApp"));
-const TablePage = lazy(() => import("./layout/table"));
-// const TestLazy = lazy(() => import('./components/AuthApp'))
-// const SidebarApp = lazy(() => import('./components/SidebarApp'));
+
+const MarketingPage = lazy(() => import("./components/apps/MarketingApp"));
+const AuthPage = lazy(() => import("./components/apps/AuthApp"));
+const DashboardPage = lazy(() => import("./components/apps/DashboardApp"));
+const TablePage = lazy(() => import("./components/apps/DodgeTableApp"));
 
 const generateClassName = createGenerateClassName({
-  productionPrefix: "co",
+  productionPrefix: "container",
 });
 
 const history = createBrowserHistory();
@@ -54,15 +55,14 @@ export default () => {
                 <Route path="/auth">
                   <AuthPage onSignIn={() => setIsSignedIn(true)} />
                 </Route>
-                <Route path="/dodge">
-                  <TablePage token={token} />
-                </Route>
-                <Route path="/dashboard">
-                  {!isSignedIn && <Redirect to="/" />}
-                  <DashboardPage />
-                </Route>
-                <Route path="/" component={HomePage} />
-                <Route path={"*"} component={NotFound} />
+                <AdminRoute path="/dashboard" component={DashboardPage} role={100} />
+                <PrivateRoute
+                  path="/dodge"
+                  component={TablePage}
+                  token={token}
+                />
+                <PrivateRoute path="/" component={MarketingPage} />
+                <Route path="*" component={NotFound} />
               </Switch>
             </Suspense>
           </div>
@@ -71,3 +71,10 @@ export default () => {
     </ErrorBoundary>
   );
 };
+
+{
+  /* <Route path="/dashboard">
+                  {!isSignedIn && <Redirect to="/" />}
+                  <DashboardPage />
+  </Route> */
+}

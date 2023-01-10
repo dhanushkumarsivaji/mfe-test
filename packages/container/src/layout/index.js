@@ -1,9 +1,8 @@
 import React, { lazy } from "react";
-const Marketing = lazy(() => import("../components/MarketingApp"));
-const Sidebar = lazy(() => import("../components/SidebarApp"));
+const Sidebar = lazy(() => import("../components/apps/SidebarApp"));
 import ErrorBoundary from "../components/ErrorBoundary";
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
     <ErrorBoundary>
     <div style={{display:'flex', flex: 1}}>
@@ -11,7 +10,7 @@ const Layout = () => {
             <Sidebar />
         </div>
         <div style={{flex:'1', margin: '30px'}}>
-            <Marketing />
+            {children}
         </div>
     </div>
   </ErrorBoundary>
