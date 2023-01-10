@@ -1,3 +1,4 @@
+import './MuiClassNameSetup';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
