@@ -1,12 +1,7 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { NavLink } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 const LINKS = [
-  {
-    path: "/",
-    name: "Home",
-  },
   {
     path: "/pricing",
     name: "Pricing",
@@ -35,19 +30,14 @@ const SidebarContainer = styled('div')(() => ({
 
   margin: '0',
   padding: 0,
-  height: '100%',
-  width: '200px',
-  overflow: 'auto',
-  position: 'fixed',
+  height: '100vh',
   backgroundColor: '#f1f1f1',
-  // '@media (max-width: 1438px)': {
-  //   margin: '0 16px'
-  // }
 }));
 
 const StyledNavLink = styled('span')(() => ({
   '& a': {
-    display: 'block',
+    display: 'flex',
+    flexDirection: 'column',
     fontSize: '16px',
     lineHeight: '20px',
     fontWeight: 900,
