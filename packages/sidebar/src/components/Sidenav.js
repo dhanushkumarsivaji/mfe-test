@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 const LINKS = [
   {
+    path: "/",
+    name: "Home",
+  },
+  {
     path: "/pricing",
     name: "Pricing",
   },
