@@ -25,7 +25,7 @@ const history = createBrowserHistory();
 export default () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const token = { accessToken:"123",  refreshToken: "456" }
+  const token = { accessToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",  refreshToken: "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ" }
 
   useEffect(() => {
     if (isSignedIn) {
@@ -53,7 +53,9 @@ export default () => {
                 {!isSignedIn && <Redirect to="/" />}
                 <DashboardLazy />
               </Route>
-              <Route path="/" component={MarketingLazy} />
+              <MarketingLazy>
+                 <Route path="/" component={MarketingLazy} />
+              </MarketingLazy>
             </Switch>
           </Suspense>
         </div>

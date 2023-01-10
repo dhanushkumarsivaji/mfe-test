@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: '#f1f1f1'
   },
   toolbar: {
     flexWrap: 'wrap',
@@ -66,7 +67,7 @@ export default function Header({ isSignedIn, onSignOut }) {
   return (
     <React.Fragment>
       <AppBar
-        position="static"
+        position="sticky"
         color="default"
         elevation={0}
         className={classes.appBar}
