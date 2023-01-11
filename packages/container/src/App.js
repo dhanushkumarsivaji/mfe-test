@@ -37,11 +37,11 @@ export default () => {
       "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ",
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/");
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+    // if (isAuthenticated) {
+    //   history.push("/");
+    // }
+  // }, [isAuthenticated]);
 
   const onSignIn = (data) => {
     login(data);
@@ -63,8 +63,7 @@ export default () => {
               role={1001}
             />
             <PrivateRoute path="/dodge" component={TablePage} token={token} />
-            <PrivateRoute path="/" component={MarketingPage} />
-            <Route path="*" component={NotFound} />
+            <PrivateRoute path="/" component={MarketingPage} token={token}/>
           </Switch>
         </Suspense>
       </div>

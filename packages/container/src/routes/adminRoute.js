@@ -19,6 +19,7 @@ import AuthContext from '../context/auth/context';
   
     return (
       <Route
+        exact
         {...restProps}
         render={routeRenderProps =>
           isAuthenticated && ALLOWD_ROLES.includes(role) ? (

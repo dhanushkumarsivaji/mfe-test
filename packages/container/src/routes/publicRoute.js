@@ -16,6 +16,7 @@ import AuthContext from '../context/auth/context';
   
     return (
       <Route
+        exact
         {...restProps}
         render={routeRenderProps =>
           isAuthenticated ? (

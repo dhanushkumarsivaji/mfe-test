@@ -7,29 +7,29 @@ const LINKS = [
     name: "Home",
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-  },
-  {
     path: "/pricing",
     name: "Pricing",
   },
   {
-    path: "/auth/signin",
-    name: "Signin",
-  },
-  {
-    path: "/auth/signup",
-    name: "Signup",
+    path: "/dashboard",
+    name: "Dashboard",
   },
   {
     path: "/dodge/table",
     name: "Table",
   },
-  {
-    path: "/dodge/edit",
-    name: "Edit",
-  },
+  // {
+  //   path: "/sdsd",
+  //   name: "NotFound",
+  // },
+  // {
+  //   path: "/auth/signin",
+  //   name: "Signin",
+  // },
+  // {
+  //   path: "/auth/signup",
+  //   name: "Signup",
+  // },
 ];
 
  
