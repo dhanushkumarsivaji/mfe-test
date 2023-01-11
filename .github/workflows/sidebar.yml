@@ -1,0 +1,21 @@
+name: deploy-sidebar
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/sidebar/**'
+
+defaults:
+  run:
+    working-directory: packages/sidebar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build

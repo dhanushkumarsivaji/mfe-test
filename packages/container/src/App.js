@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, useState, useEffect, useContext } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import React, { lazy, Suspense, useContext } from "react";
+import { Route, Switch } from "react-router-dom";
 import Progress from "./components/Progress";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -22,13 +22,10 @@ if (sessionStorage.token) {
 
 export default () => {
 
-  const history = useHistory();
 
   const authContext = useContext(AuthContext);
 
-  const { login, error, clearErrors, isAuthenticated, logout } = authContext;
-
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { login, isAuthenticated, logout } = authContext;
 
   const token = {
     accessToken:
@@ -64,6 +61,7 @@ export default () => {
             />
             <PrivateRoute path="/dodge" component={TablePage} token={token} />
             <PrivateRoute path="/" component={MarketingPage} token={token}/>
+            <PrivateRoute path={"*"} component={NotFound} />
           </Switch>
         </Suspense>
       </div>
