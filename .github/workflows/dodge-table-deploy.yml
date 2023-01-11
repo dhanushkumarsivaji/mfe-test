@@ -2,7 +2,7 @@ name: deploy-dodge-table
 
 on:
   workflow_run:
-    workflows: ["build-dodge-table"]
+    workflows: ["dodge-table-build"]
     branches: [master]
     types: [completed]
 

@@ -2,7 +2,7 @@ name: deploy-sidebar
 
 on:
   workflow_run:
-    workflows: ["build-sidebar"]
+    workflows: ["sidebar-build"]
     branches: [master]
     types: [completed]
 

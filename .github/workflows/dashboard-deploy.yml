@@ -2,7 +2,7 @@ name: deploy-dashboard
 
 on:
   workflow_run:
-    workflows: ["build-dashboard"]
+    workflows: ["dashboard-build"]
     branches: [master]
     types: [completed]
 

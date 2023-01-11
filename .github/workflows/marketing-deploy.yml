@@ -2,7 +2,7 @@ name: deploy-marketing
 
 on:
   workflow_run:
-    workflows: ["build-marketing"]
+    workflows: ["marketing-build"]
     branches: [master]
     types: [completed]
 

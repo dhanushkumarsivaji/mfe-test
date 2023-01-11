@@ -2,7 +2,7 @@ name: deploy-auth
 
 on:
   workflow_run:
-    workflows: ["build-auth"]
+    workflows: ["auth-build"]
     branches: [master]
     types: [completed]
 
