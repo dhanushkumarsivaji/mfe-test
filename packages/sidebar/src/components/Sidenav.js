@@ -7,6 +7,10 @@ const LINKS = [
     name: "Home",
   },
   {
+    path: "/dashboard",
+    name: "Dashboard",
+  },
+  {
     path: "/pricing",
     name: "Pricing",
   },

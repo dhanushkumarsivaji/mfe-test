@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     Route,
     Redirect,
   } from "react-router-dom";
 import Layout from "../layout";
+import AuthContext from '../context/auth/context';
 
 
  const ALLOWD_ROLES = [1001,1002]
   
   export const AdminRoute = props => {
-    const isAuthenticated = true
+    const authContext = useContext(AuthContext);
+    const { isAuthenticated, loading } = authContext;
   
     const { component: Component, children: Children, token, role,   ...restProps  } = props;
   
