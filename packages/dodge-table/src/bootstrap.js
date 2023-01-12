@@ -1,8 +1,11 @@
 import './MuiClassNameSetup';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from "react-redux";
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
+import store from "./store";
+
 
 // Mount function to start up the app
 const mount = (el, { onNavigate, defaultHistory, initialPath, token }) => {
@@ -19,7 +22,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath, token }) => {
     history.listen(onNavigate);
   }
 
-  root.render(<App history={history} token={token}/>);
+  root.render(<Provider store={store}><App history={history} token={token}/></Provider>);
 
   return {
     onParentNavigate({ pathname: nextPathname }) {

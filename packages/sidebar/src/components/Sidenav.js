@@ -18,6 +18,10 @@ const LINKS = [
     path: "/dodge/table",
     name: "Table",
   },
+  {
+    path: "/dodge/user",
+    name: "User",
+  },
   // {
   //   path: "/sdsd",
   //   name: "NotFound",
