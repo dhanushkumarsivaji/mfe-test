@@ -1,14 +1,14 @@
-import React, { lazy, Suspense, useContext } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Progress from "./components/Progress";
-import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
-import { AdminRoute } from "./routes/adminRoute";
-import AuthContext from './context/auth/context';
+// import { AdminRoute } from "./routes/adminRoute";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import setAuthToken from "./utils/axios";
+import { loginRequest } from "./authConfig";
 
 const MarketingPage = lazy(() => import("./components/apps/MarketingApp"));
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
@@ -19,49 +19,59 @@ if (sessionStorage.token) {
   setAuthToken(sessionStorage.token);
 }
 
-
 export default () => {
-
-
-  const authContext = useContext(AuthContext);
-
-  const { login, isAuthenticated, logout } = authContext;
-
+  const isAuthenticated = useIsAuthenticated();
   const token = {
     accessToken:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
     refreshToken:
       "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ",
   };
+  const { instance } = useMsal();
 
-  // useEffect(() => {
-    // if (isAuthenticated) {
-    //   history.push("/");
+  const onSignIn = () => {
+    // if (loginType === "popup") {
+    instance.loginRedirect(loginRequest).catch((e) => {
+      console.log("check", e);
+    });
+    // } else if (loginType === "redirect") {
+    //   instance.loginRedirect(loginRequest).catch((e) => {
+    //     console.log(e);
+    //   });
     // }
-  // }, [isAuthenticated]);
-
-  const onSignIn = (data) => {
-    login(data);
   };
 
   return (
     <ErrorBoundary>
       <div>
-        <Header
-          onSignOut={() => logout()}
-          isSignedIn={isAuthenticated}
-        />
+       {/* <Header onSignOut={handleLogout} isSignedIn={isAuthenticated} /> */}
         <Suspense fallback={<Progress />}>
           <Switch>
-            <PublicRoute path="/auth" component={AuthPage} onSignIn={onSignIn} />
-            <AdminRoute
+            <PublicRoute
+              path="/auth"
+              component={AuthPage}
+              onSignIn={onSignIn}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
               path="/dashboard"
               component={DashboardPage}
               role={1001}
+              isAuthenticated={isAuthenticated}
             />
-            <PrivateRoute path="/dodge" component={TablePage} token={token} />
-            <PrivateRoute path="/" component={MarketingPage} token={token}/>
-            <PrivateRoute path={"*"} component={NotFound} />
+            <PrivateRoute
+              path="/dodge"
+              component={TablePage}
+              token={token}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/"
+              component={MarketingPage}
+              token={token}
+              isAuthenticated={isAuthenticated}
+            />
+            <Route path={"*"} component={NotFound} />
           </Switch>
         </Suspense>
       </div>
@@ -76,9 +86,7 @@ export default () => {
   </Route> */
 }
 
-
 // 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
-
 
 // {
 //   "clientId": "feacbad9-0350-4b82-8642-a1a9e6abccaa",

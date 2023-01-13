@@ -1,35 +1,39 @@
-import React, { useContext } from "react";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 import {
-    Route,
-    Redirect,
-  } from "react-router-dom";
-import AuthContext from '../context/auth/context';
+  AuthenticatedTemplate,
+  UnauthenticatedTemplate,
+} from "@azure/msal-react";
 
-  
-  export const PublicRoute = props => {
-    const authContext = useContext(AuthContext);
-    const { isAuthenticated } = authContext;
-  
-    const { component: Component, children: Children, onSignIn,  ...restProps  } = props;
-  
-    if (!Component) return null;
-  
-    return (
-      <Route
-        exact
-        {...restProps}
-        render={routeRenderProps =>
-          isAuthenticated ? (
+export const PublicRoute = (props) => {
+  const {
+    component: Component,
+    children: Children,
+    onSignIn,
+    ...restProps
+  } = props;
+
+  if (!Component) return null;
+
+  return (
+    <Route
+      exact
+      {...restProps}
+      render={(routeRenderProps) => (
+        <>
+          <AuthenticatedTemplate>
             <Redirect
               to={{
                 pathname: "/",
-                state: { from: routeRenderProps.location }
+                state: { from: routeRenderProps.location },
               }}
             />
-          ) : (
-              <Component {...routeRenderProps} onSignIn={onSignIn}/> 
-          )
-        }
-      />
-    )
-  }
+          </AuthenticatedTemplate>
+          <UnauthenticatedTemplate>
+            <Component {...routeRenderProps} onSignIn={onSignIn} />
+          </UnauthenticatedTemplate>
+        </>
+      )}
+    />
+  );
+};
