@@ -5,6 +5,7 @@ import Table from "./components/table";
 import Edit from "./components/edit";
 import User from "./components/user";
 import { updateUserDetails } from "./features/userSlice";
+import useGetApi from "./hooks/useGetApi";
 
 export default ({ history, token }) => {
 
@@ -16,12 +17,19 @@ export default ({ history, token }) => {
       dispatch(updateUserDetails(user))
   },[])
 
+  const {
+    result: { res, loading, error, status },
+  } = useGetApi('accounts', token);
+
+
+  useEffect(() => {
+      console.log(res, loading, error, status);
+  }, [res, loading, error, status]);
+
 
   return (
     <div>
-      <p style={{ display: "flex", justifyContent: "center" }}>
-        {JSON.stringify(token, null, 4)}
-      </p>
+
       <Router history={history}>
         <Switch>
           <Route path="/dodge/table" component={Table} />

@@ -1,39 +1,45 @@
 import React,{ useState, useEffect } from "react";
-import { InteractionType } from "@azure/msal-browser";
-import { useMsalAuthentication } from "@azure/msal-react";
+import { loginRequest } from "../authConfig"; 
+import { useMsal } from "@azure/msal-react";
 import { ProfileData } from "./ProfileData";
 import { WelcomeName } from "./WelcomeName";
-import { fetchData } from '../utils/fetch';
+import { callMsGraph } from '../utils/fetch';
 
 export const Profile = () => {
+    const { instance, accounts } = useMsal();
     const [graphData, setGraphData] = useState(null);
-    const { result, error } = useMsalAuthentication(InteractionType.Popup, {
-        scopes: ["User.Read"]
-    });
+
+    // const name = accounts[0] && accounts[0].name;
+
+    const RequestProfileData = () => {
+        const request = {
+            ...loginRequest,
+            account: accounts[0]
+        };
+
+        // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+        instance.acquireTokenSilent(request).then((response) => {
+            callMsGraph(response.accessToken).then(response => setGraphData(response));
+        }).catch((e) => {
+            instance.acquireTokenPopup(request).then((response) => {
+                callMsGraph(response.accessToken).then(response => setGraphData(response));
+            });
+        });
+    }
 
     useEffect(() => {
-        console.log(result,error)
-        if (!!graphData) {
-            return;
-        }
+        RequestProfileData()
+    },[])
 
-        if (!!error) {
-            console.log(error);
-            return;
-        }
-
-        if (result) {
-            const { accessToken } = result;
-            fetchData('https://graph.microsoft.com/v1.0/me', accessToken)
-                .then(response => setGraphData(response))
-                .catch(error => console.log(error));
-        }
-    }, [graphData, error, result]);
 
     return (
         <div>
             <WelcomeName />
-            { graphData ? <ProfileData graphData={graphData} /> : null }
+            {graphData ? 
+                <ProfileData graphData={graphData} />
+                :
+            null
+            }
         </div>
     )
 }

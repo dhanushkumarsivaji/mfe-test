@@ -1,7 +1,12 @@
-export const fetchData = (endpoint, accessToken) => {
+import { graphConfig } from "../authConfig";
 
+/**
+ * Attaches a given access token to a Microsoft Graph API call. Returns information about the user
+ */
+export async function callMsGraph(accessToken) {
     const headers = new Headers();
     const bearer = `Bearer ${accessToken}`;
+
     headers.append("Authorization", bearer);
 
     const options = {
@@ -9,7 +14,7 @@ export const fetchData = (endpoint, accessToken) => {
         headers: headers
     };
 
-    return fetch(endpoint, options)
+    return fetch(graphConfig.graphMeEndpoint, options)
         .then(response => response.json())
         .catch(error => console.log(error));
 }

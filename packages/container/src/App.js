@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Progress from "./components/Progress";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -20,14 +20,31 @@ if (sessionStorage.token) {
 }
 
 export default () => {
+  const [token, setToken] = useState('')
   const isAuthenticated = useIsAuthenticated();
-  const token = {
-    accessToken:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    refreshToken:
-      "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ",
-  };
-  const { instance } = useMsal();
+  const { instance, accounts } = useMsal();
+
+  function acquireToken() {
+    const request = {
+      ...loginRequest,
+      account: accounts[0],
+    };
+
+    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+    instance
+      .acquireTokenSilent(request)
+      .then((response) => {
+        setToken(response.accessToken);
+      })
+      .catch((e) => {
+        instance.acquireTokenPopup(request).then((response) => {
+          setToken(response.accessToken);
+        });
+      });
+  }
+  useEffect(() => {
+    acquireToken();
+  }, []);
 
   const onSignIn = () => {
     // if (loginType === "popup") {
