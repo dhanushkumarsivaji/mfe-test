@@ -5,10 +5,10 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
-// import { AdminRoute } from "./routes/adminRoute";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import setAuthToken from "./utils/axios";
 import { loginRequest } from "./authConfig";
+import { Profile } from "./components/Profile";
 
 const MarketingPage = lazy(() => import("./components/apps/MarketingApp"));
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
@@ -44,7 +44,6 @@ export default () => {
   return (
     <ErrorBoundary>
       <div>
-       {/* <Header onSignOut={handleLogout} isSignedIn={isAuthenticated} /> */}
         <Suspense fallback={<Progress />}>
           <Switch>
             <PublicRoute
@@ -62,6 +61,12 @@ export default () => {
             <PrivateRoute
               path="/dodge"
               component={TablePage}
+              token={token}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/profile"
+              component={Profile}
               token={token}
               isAuthenticated={isAuthenticated}
             />

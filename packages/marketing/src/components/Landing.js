@@ -1,13 +1,12 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-;import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
-
+import * as React from "react";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -18,12 +17,12 @@ export default function Album() {
       <main>
         <Box
           sx={{
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             pt: 8,
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography
               component="h1"
               variant="h2"
@@ -31,29 +30,29 @@ export default function Album() {
               color="text.primary"
               gutterBottom
             >
-              Home Page
+              Welcome to Dodge & Cox
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s.
             </Typography>
             <Stack
               sx={{ pt: 4 }}
               direction="row"
-              spacing={2}
+              spacing={4}
               justifyContent="center"
             >
-            <Link to="/pricing" >
-            <Button variant="contained" color="primary">
-              Pricing
-            </Button>
-          </Link>
-          <Link to="/pricing">
-          <Button variant="outlined" color="primary" >
-            Pricing
-          </Button>
-        </Link>
+              <Link to="/pricing" style={{textDecoration:'none'}}>
+                <Button variant="contained" color="primary" size="lg" >
+                  Internel Navigate
+                </Button>
+              </Link>
             </Stack>
           </Container>
         </Box>

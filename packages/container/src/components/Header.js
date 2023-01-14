@@ -29,7 +29,7 @@ export default function Header({ isSignedIn, onSignOut }) {
             to="/"
             sx={{textDecoration:'none', fontWeight: 700}}
           >
-            Micro App
+            Dodge & Cox
           </Typography>
           <Button
             color="primary"
