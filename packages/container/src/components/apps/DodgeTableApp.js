@@ -2,9 +2,11 @@ import { mount } from 'dodgetable/DodgetableApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default ({token}) => {
+export default ({token, acquireToken}) => {
   const ref = useRef(null);
   const history = useHistory();
+
+  console.log("app", acquireToken)
 
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
@@ -16,7 +18,8 @@ export default ({token}) => {
           history.push(nextPathname);
         }
       },
-      token
+      token,
+      acquireToken
     });
 
     history.listen(onParentNavigate);

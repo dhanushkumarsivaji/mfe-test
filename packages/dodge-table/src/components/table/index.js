@@ -1,8 +1,9 @@
 import React from "react";
+import { isEmpty } from "lodash";
 import TableComponent from "./table";
 
 
-function Table() {
+function Table({ data, loading }) {
 
   const [checked, setChecked] = React.useState(false);
 
@@ -10,11 +11,11 @@ function Table() {
     setChecked(event.target.checked);
   };
 
-  return (
-    <>  
-      <TableComponent enableColumnFilters={checked} handleChange={handleChange}/>
-    </>
-  );
+  return !isEmpty(data) && !loading ? (
+    <div>  
+      <TableComponent enableColumnFilters={checked} handleChange={handleChange} data={data}/>
+    </div>
+  ) : <h1>loading ....</h1>;
 }
 
 export default Table;

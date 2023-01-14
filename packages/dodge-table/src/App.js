@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Table from "./components/table";
@@ -7,7 +7,21 @@ import User from "./components/user";
 import { updateUserDetails } from "./features/userSlice";
 import useGetApi from "./hooks/useGetApi";
 
-export default ({ history, token }) => {
+export default ({ history, acquireToken }) => {
+
+  const [token, setToken] = useState('')
+
+  const getToken = async () => {
+       let isToken  = await acquireToken();
+       if(isToken){
+        setToken(isToken);
+       }
+  }
+
+  useEffect(() => {
+    getToken()
+  },[])
+
 
   const dispatch = useDispatch()
 
@@ -21,18 +35,12 @@ export default ({ history, token }) => {
     result: { res, loading, error, status },
   } = useGetApi('accounts', token);
 
-
-  useEffect(() => {
-      console.log(res, loading, error, status);
-  }, [res, loading, error, status]);
-
-
   return (
     <div>
 
       <Router history={history}>
         <Switch>
-          <Route path="/dodge/table" component={Table} />
+          <Route path="/dodge/table" ><Table data={res} loading={loading}/> </Route>
           <Route path="/dodge/edit" component={Edit} />
           <Route path="/dodge/user" component={User} />
         </Switch>

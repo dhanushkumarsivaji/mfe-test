@@ -11,8 +11,10 @@ export const PrivateRoute = (props) => {
     component: Component,
     children: Children,
     token,
+    acquireToken,
     ...restProps
   } = props;
+
 
   if (!Component) return null;
 
@@ -24,7 +26,7 @@ export const PrivateRoute = (props) => {
         <>
           <AuthenticatedTemplate>
             <Layout>
-              <Component {...routeRenderProps} token={token} />
+              <Component {...routeRenderProps} token={token} acquireToken={acquireToken} />
             </Layout>
           </AuthenticatedTemplate>
           <UnauthenticatedTemplate>

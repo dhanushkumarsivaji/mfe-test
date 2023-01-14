@@ -99,6 +99,7 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 };
 
 export default function TableComponent({
+  data,
   enableColumnFilters,
   handleChange,
 }) {
@@ -126,7 +127,7 @@ export default function TableComponent({
       {
         accessorKey: "accountId",
         header: () => <span>Account Id</span>,
-        footer: ({ table }) => <h2>Total: {table.getFilteredRowModel().rows.reduce((total, row) => total + row.getValue('accountId'), 0)}</h2>,
+        // footer: ({ table }) => <h2>Total: {table.getFilteredRowModel().rows.reduce((total, row) => total + row.getValue('accountId'), 0)}</h2>,
       },
       {
         accessorKey: "accountName",
@@ -145,11 +146,6 @@ export default function TableComponent({
         // footer: (props) => props.column.id,
       },
       {
-        accessorKey: "date",
-        header: "Date",
-        cell: ({ getValue }) => getValue()
-      },
-      {
         accessorKey: "edit",
         header: () => <AlignTableCell position="center"></AlignTableCell>,
         enableColumnFilter: false,
@@ -164,12 +160,6 @@ export default function TableComponent({
     ],
     []
   );
-
-  const [data, setData] = React.useState(() => makeData(2500));
-
-  const refreshData = () => setData((old) => makeData(2500));
-
-  const [filteredData, setFilteredData] = React.useState([]);
 
   const [{ pageIndex, pageSize }, setPagination] =
     React.useState({
@@ -235,11 +225,11 @@ export default function TableComponent({
     canNextPage: !table.getCanNextPage(),
   };
 
-  useEffect(() => {
-    let fdata = table.getRowModel().rows.map((row) => row.original);
-    // console.log(JSON.stringify(fdata,null,2))
-    setFilteredData(fdata);
-  }, [table.getRowModel().rows]);
+  // useEffect(() => {
+  //   let fdata = table.getRowModel().rows.map((row) => row.original);
+  //   // console.log(JSON.stringify(fdata,null,2))
+  //   setFilteredData(fdata);
+  // }, [table.getRowModel().rows]);
 
   const print = (data) => {
     const pdf = new jsPDF("p", "pt", "a4");

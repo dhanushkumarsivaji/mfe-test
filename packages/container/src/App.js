@@ -7,7 +7,7 @@ import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import setAuthToken from "./utils/axios";
-import { loginRequest } from "./authConfig";
+import { customApiRequest, loginRequest } from "./authConfig";
 import { Profile } from "./components/Profile";
 
 const MarketingPage = lazy(() => import("./components/apps/MarketingApp"));
@@ -20,31 +20,25 @@ if (sessionStorage.token) {
 }
 
 export default () => {
-  const [token, setToken] = useState('')
+
   const isAuthenticated = useIsAuthenticated();
   const { instance, accounts } = useMsal();
 
-  function acquireToken() {
+   const acquireToken = async () => {
     const request = {
-      ...loginRequest,
+      ...customApiRequest,
       account: accounts[0],
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-    instance
-      .acquireTokenSilent(request)
-      .then((response) => {
-        setToken(response.accessToken);
-      })
-      .catch((e) => {
-        instance.acquireTokenPopup(request).then((response) => {
-          setToken(response.accessToken);
-        });
-      });
+    try {
+      const response = await instance
+        .acquireTokenSilent(request);
+      return response.accessToken;
+    } catch (e) {
+      instance.acquireTokenPopup(request).then((response_1) => response_1.accessToken);
+    }
   }
-  useEffect(() => {
-    acquireToken();
-  }, []);
 
   const onSignIn = () => {
     // if (loginType === "popup") {
@@ -74,24 +68,28 @@ export default () => {
               component={DashboardPage}
               role={1001}
               isAuthenticated={isAuthenticated}
+              acquireToken={acquireToken}
             />
             <PrivateRoute
               path="/dodge"
               component={TablePage}
-              token={token}
+              token={"token"}
               isAuthenticated={isAuthenticated}
+              acquireToken={acquireToken}
             />
             <PrivateRoute
               path="/profile"
               component={Profile}
-              token={token}
+              token={"token"}
               isAuthenticated={isAuthenticated}
+              acquireToken={acquireToken}
             />
             <PrivateRoute
               path="/"
               component={MarketingPage}
-              token={token}
+              token={"token"}
               isAuthenticated={isAuthenticated}
+              acquireToken={acquireToken}
             />
             <Route path={"*"} component={NotFound} />
           </Switch>
