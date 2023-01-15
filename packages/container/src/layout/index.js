@@ -1,11 +1,14 @@
 import React, { lazy } from "react";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { useHistory } from "react-router-dom";
+import { ErrorBoundary } from 'react-error-boundary';
 const Sidebar = lazy(() => import("../components/apps/SidebarApp"));
-import ErrorBoundary from "../components/ErrorBoundary";
+import ErrorBoundaryComponent from "../components/ErrorBoundary";
 import Header from "../components/Header";
 
 const Layout = ({ children }) => {
 
+  const history = useHistory()
   const isAuthenticated = useIsAuthenticated();
   const { instance } = useMsal();
 
@@ -14,6 +17,8 @@ const Layout = ({ children }) => {
       postLogoutRedirectUri: "/",
       mainWindowRedirectUri: "/",
     });
+    history.push('/auth/signin')
+
   };
 
   return (
@@ -21,12 +26,12 @@ const Layout = ({ children }) => {
     <Header onSignOut={handleLogout} isSignedIn={isAuthenticated} />
     <div style={{ display: "flex", flex: 1 }}>
       <div style={{ width: "240px" }}>
-        <ErrorBoundary>
+        <ErrorBoundary FallbackComponent={ErrorBoundaryComponent} onReset={() => { }}>
           <Sidebar />
         </ErrorBoundary>
       </div>
       <div style={{ flex: "1", margin: "30px" }}>
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <ErrorBoundary FallbackComponent={ErrorBoundaryComponent} onReset={() => { }}>{children}</ErrorBoundary>
       </div>
     </div>
     </div>

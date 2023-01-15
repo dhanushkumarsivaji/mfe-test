@@ -150,7 +150,7 @@ export default function TableComponent({
         header: () => <AlignTableCell position="center"></AlignTableCell>,
         enableColumnFilter: false,
         enableSorting: false,
-        cell: ({ row, getValue }) => <AlignTableCell position="center">
+        cell: ({ row }) => <AlignTableCell position="center">
           <EditOutlinedIcon sx={{ cursor: 'pointer' }} onClick={() => handleEditClick(row.original)}></EditOutlinedIcon>
           <DeleteOutlined sx={{ cursor: 'pointer', ml: 2 }} onClick={() => console.log(row.original)}></DeleteOutlined>
         </AlignTableCell>,

@@ -1,7 +1,6 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Progress from "./components/Progress";
-import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
@@ -53,7 +52,7 @@ export default () => {
   };
 
   return (
-    <ErrorBoundary>
+    <>
       <div>
         <Suspense fallback={<Progress />}>
           <Switch>
@@ -95,7 +94,7 @@ export default () => {
           </Switch>
         </Suspense>
       </div>
-    </ErrorBoundary>
+    </>
   );
 };
 

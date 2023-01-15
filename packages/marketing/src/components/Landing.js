@@ -38,9 +38,9 @@ export default function Album() {
               color="text.secondary"
               paragraph
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s.
+              Dodge & Cox manages money for individuals and institutions using a
+              single value-oriented investment philosophy across a focused set
+              of strategies.
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -48,9 +48,9 @@ export default function Album() {
               spacing={4}
               justifyContent="center"
             >
-              <Link to="/pricing" style={{textDecoration:'none'}}>
-                <Button variant="contained" color="primary" size="lg" >
-                  Internel Navigate
+              <Link to="/products" style={{ textDecoration: "none" }}>
+                <Button variant="contained" color="primary" size="lg">
+                  Explore Our Funds
                 </Button>
               </Link>
             </Stack>

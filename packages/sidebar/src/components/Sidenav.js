@@ -1,10 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from '@mui/material/styles';
+
 const LINKS = [
   {
     path: "/",
     name: "Home",
+  },
+  {
+    path: "/dodge/table",
+    name: "Accounts",
   },
   {
     path: "/profile",
@@ -14,14 +19,11 @@ const LINKS = [
     path: "/dashboard",
     name: "Dashboard",
   },
-  {
-    path: "/dodge/table",
-    name: "Table",
-  },
-  {
-    path: "/dodge/user",
-    name: "User",
-  },
+
+  // {
+  //   path: "/dodge/user",
+  //   name: "User",
+  // },
   // {
   //   path: "/sdsd",
   //   name: "NotFound",
@@ -80,7 +82,7 @@ export default function LinkDemo() {
   return (
     <SidebarContainer sx={{ typography: "body1" }}>
       {LINKS.map((link, index) => (
-        <StyledNavLink>
+        <StyledNavLink key={index}>
             <NavLink key={index} to={link.path}>{link.name}</NavLink>
         </StyledNavLink>
       ))}

@@ -6,8 +6,6 @@ export default ({token, acquireToken}) => {
   const ref = useRef(null);
   const history = useHistory();
 
-  console.log("app", acquireToken)
-
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
       initialPath: history.location.pathname,

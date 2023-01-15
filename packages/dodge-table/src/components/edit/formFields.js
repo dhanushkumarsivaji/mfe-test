@@ -7,35 +7,35 @@ import { useHistory } from 'react-router-dom';
 import { merge } from 'lodash';
 import { useForm, Controller } from "react-hook-form";
 
-const accountStatus = [
-  {
-    value: "Open",
-    label: "Open",
-  },
-  {
-    value: "PendingOpen",
-    label: "PendingOpen",
-  },
-  {
-    value: "Closed",
-    label: "Closed",
-  },
-];
+// const accountStatus = [
+//   {
+//     value: "Open",
+//     label: "Open",
+//   },
+//   {
+//     value: "PendingOpen",
+//     label: "PendingOpen",
+//   },
+//   {
+//     value: "Closed",
+//     label: "Closed",
+//   },
+// ];
 
-const productType = [
-  {
-    value: "Equity",
-    label: "Equity",
-  },
-  {
-    value: "Fixed Income",
-    label: "Fixed Income",
-  },
-  {
-    value: "Balanced",
-    label: "Balanced",
-  },
-];
+// const productType = [
+//   {
+//     value: "Equity",
+//     label: "Equity",
+//   },
+//   {
+//     value: "Fixed Income",
+//     label: "Fixed Income",
+//   },
+//   {
+//     value: "Balanced",
+//     label: "Balanced",
+//   },
+// ];
 
 const myHelper = {
   accountName: {

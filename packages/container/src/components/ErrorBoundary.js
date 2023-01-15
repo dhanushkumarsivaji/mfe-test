@@ -1,22 +1,50 @@
-import React from "react";
+import React from 'react';
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-export default class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+const ErrorBoundaryContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 100px 0px;
+
+  & h1,
+  h3,
+  h4 {
+    padding: 10px 0px;
   }
+`;
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
+function ErrorBoundary() {
 
-  componentDidCatch() {}
 
-  render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+  const onClick = () => {
+    if (typeof window !== "undefined") {
+      window.location.reload();
     }
+  };
 
-    return this.props.children;
-  }
+  return (
+    <div>
+      <ErrorBoundaryContainer>
+        <Typography variant="h6" sx={{fontWeight:'700'}}>Something went wrong</Typography>
+      {  /* <Typography variant="h6">
+          Please refresh the screen by clicking the retry button below or close
+          the browser and try again after sometime
+  </Typography> */ }
+        <Button
+          sx={{ margin: "16px 0px" }}
+          variant="contained"
+          onClick={onClick}
+        >
+          Retry
+        </Button>
+      </ErrorBoundaryContainer>
+    </div>
+  );
 }
+
+export default ErrorBoundary;
