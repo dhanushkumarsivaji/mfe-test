@@ -11,6 +11,7 @@ export const PrivateRoute = (props) => {
     children: Children,
     token,
     acquireToken,
+    isAuthenticated,
     ...restProps
   } = props;
 
@@ -24,7 +25,7 @@ export const PrivateRoute = (props) => {
       render={(routeRenderProps) => (
         <>
           <AuthenticatedTemplate>
-              <Component {...routeRenderProps} token={token} acquireToken={acquireToken} />
+              <Component {...routeRenderProps} token={token} acquireToken={acquireToken} isAuthenticated={isAuthenticated}/>
           </AuthenticatedTemplate>
           <UnauthenticatedTemplate>
             <Redirect

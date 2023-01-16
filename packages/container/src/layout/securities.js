@@ -15,10 +15,12 @@ const SecuritiesPage = ({ ...rest }) => {
   const { instance } = useMsal();
 
   const handleLogout = async () => {
+
     await instance.logoutPopup({
       postLogoutRedirectUri: "/",
       mainWindowRedirectUri: "/",
     });
+    sessionStorage.clear()
     history.push('/auth/signin')
 
   };

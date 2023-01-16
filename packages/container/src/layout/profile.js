@@ -19,6 +19,7 @@ const ProfilePage = ({ ...rest }) => {
       postLogoutRedirectUri: "/",
       mainWindowRedirectUri: "/",
     });
+    sessionStorage.clear()
     history.push('/auth/signin')
 
   };

@@ -34,8 +34,7 @@ export default () => {
       const response = await instance.acquireTokenSilent(request);
       return response.accessToken;
     } catch (e) {
-      instance
-        .acquireTokenPopup(request)
+      instance.acquireTokenPopup(request)
         .then((response_1) => response_1.accessToken);
     }
   };
