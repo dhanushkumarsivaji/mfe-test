@@ -12,6 +12,10 @@ const LINKS = [
     name: "Accounts",
   },
   {
+    path: "/securities/table",
+    name: "Securities",
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
   },

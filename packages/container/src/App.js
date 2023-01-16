@@ -7,7 +7,6 @@ import Progress from "./components/Progress";
 import NotFound from "./components/NotFound";
 import ErrorBoundaryComponent from "./components/ErrorBoundary";
 
-
 import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
 
@@ -18,7 +17,7 @@ const MarketingPage = lazy(() => import("./layout/home"));
 const ProfilePage = lazy(() => import("./layout/profile"));
 const DashboardPage = lazy(() => import("./layout/dashboard"));
 const AccountsPage = lazy(() => import("./layout/accounts"));
-
+const SecuritiesPage = lazy(() => import("./layout/securities"));
 
 export default () => {
   const isAuthenticated = useIsAuthenticated();
@@ -48,7 +47,10 @@ export default () => {
   };
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorBoundaryComponent} onReset={() => { }}>
+    <ErrorBoundary
+      FallbackComponent={ErrorBoundaryComponent}
+      onReset={() => {}}
+    >
       <div>
         <Suspense fallback={<Progress />}>
           <Switch>
@@ -68,6 +70,13 @@ export default () => {
             <PrivateRoute
               path="/accounts"
               component={AccountsPage}
+              token={"token"}
+              isAuthenticated={isAuthenticated}
+              acquireToken={acquireToken}
+            />
+            <PrivateRoute
+              path="/securities"
+              component={SecuritiesPage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}

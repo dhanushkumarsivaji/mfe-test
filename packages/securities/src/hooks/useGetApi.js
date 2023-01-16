@@ -12,7 +12,7 @@ function useGetApi(url, token) {
       async function callApi() {
         if (token) {
           API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          await API.get('accounts')
+          await API.get('securities')
             .then((res) => {
               setResult({
                 ...result,
