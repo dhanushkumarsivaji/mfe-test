@@ -11,7 +11,7 @@ const LoaderComponent = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: '50vh'
+        minHeight: '60vh'
       }}
     >
       <CircularProgress sx={{width:'80px !important', height:'80px !important'}}/>

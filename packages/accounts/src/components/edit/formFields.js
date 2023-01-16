@@ -172,7 +172,7 @@ export default function FormFields({
             />
           </Grid>
           <Grid item xs={6}>
-            <Button variant="outlined" onClick={() => history.push('/dodge/table')} sx={{ mt: 3 }}>
+            <Button variant="outlined" onClick={() => history.push('/accounts/table')} sx={{ mt: 3 }}>
               Cancel
             </Button>
             <Button

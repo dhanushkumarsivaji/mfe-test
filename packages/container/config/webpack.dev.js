@@ -20,7 +20,7 @@ const devConfig = {
         auth: 'auth@http://localhost:3002/remoteEntry.js',
         dashboard: 'dashboard@http://localhost:3003/remoteEntry.js',
         sidebar: 'sidebar@http://localhost:3004/remoteEntry.js',
-        dodgetable: 'dodgetable@http://localhost:3005/remoteEntry.js'
+        accounts: 'accounts@http://localhost:3005/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),

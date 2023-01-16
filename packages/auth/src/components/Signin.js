@@ -50,7 +50,7 @@ export default function SignIn({ onSignIn }) {
               label="Email Address"
               name="email"
               autoComplete="email"
-              value={'d@test.com'}
+              value={''}
               autoFocus
             />
             <TextField
@@ -61,7 +61,7 @@ export default function SignIn({ onSignIn }) {
               label="Password"
               type="password"
               id="password"
-              value={'S*dk1995'}
+              value={''}
               autoComplete="current-password"
             />
 

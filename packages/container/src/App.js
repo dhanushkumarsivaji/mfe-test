@@ -1,58 +1,54 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { ErrorBoundary } from "react-error-boundary";
+
 import Progress from "./components/Progress";
 import NotFound from "./components/NotFound";
+import ErrorBoundaryComponent from "./components/ErrorBoundary";
+
+
 import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
-import { useIsAuthenticated, useMsal } from "@azure/msal-react";
-import setAuthToken from "./utils/axios";
+
 import { customApiRequest, loginRequest } from "./authConfig";
-import { Profile } from "./components/Profile";
 
-const MarketingPage = lazy(() => import("./components/apps/MarketingApp"));
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
-const DashboardPage = lazy(() => import("./components/apps/DashboardApp"));
-const TablePage = lazy(() => import("./components/apps/DodgeTableApp"));
+const MarketingPage = lazy(() => import("./layout/home"));
+const ProfilePage = lazy(() => import("./layout/profile"));
+const DashboardPage = lazy(() => import("./layout/dashboard"));
+const AccountsPage = lazy(() => import("./layout/accounts"));
 
-if (sessionStorage.token) {
-  setAuthToken(sessionStorage.token);
-}
 
 export default () => {
-
   const isAuthenticated = useIsAuthenticated();
   const { instance, accounts } = useMsal();
 
-   const acquireToken = async () => {
+  const acquireToken = async () => {
     const request = {
       ...customApiRequest,
       account: accounts[0],
     };
 
-    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+    // Silently acquires an access token which is then attached to a request for API Invocation
     try {
-      const response = await instance
-        .acquireTokenSilent(request);
+      const response = await instance.acquireTokenSilent(request);
       return response.accessToken;
     } catch (e) {
-      instance.acquireTokenPopup(request).then((response_1) => response_1.accessToken);
+      instance
+        .acquireTokenPopup(request)
+        .then((response_1) => response_1.accessToken);
     }
-  }
+  };
 
   const onSignIn = () => {
-    // if (loginType === "popup") {
     instance.loginRedirect(loginRequest).catch((e) => {
       console.log("check", e);
     });
-    // } else if (loginType === "redirect") {
-    //   instance.loginRedirect(loginRequest).catch((e) => {
-    //     console.log(e);
-    //   });
-    // }
   };
 
   return (
-    <>
+    <ErrorBoundary FallbackComponent={ErrorBoundaryComponent} onReset={() => { }}>
       <div>
         <Suspense fallback={<Progress />}>
           <Switch>
@@ -70,15 +66,15 @@ export default () => {
               acquireToken={acquireToken}
             />
             <PrivateRoute
-              path="/dodge"
-              component={TablePage}
+              path="/accounts"
+              component={AccountsPage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}
             />
             <PrivateRoute
               path="/profile"
-              component={Profile}
+              component={ProfilePage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}
@@ -94,7 +90,7 @@ export default () => {
           </Switch>
         </Suspense>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

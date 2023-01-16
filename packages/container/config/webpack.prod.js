@@ -19,7 +19,7 @@ const prodConfig = {
         auth: `auth@${domain}/auth/latest/remoteEntry.js`,
         dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
         sidebar: `sidebar@${domain}/sidebar/latest/remoteEntry.js`,
-        dodgetable: `dodgetable@${domain}/dodgetable/latest/remoteEntry.js`
+        accounts: `accounts@${domain}/accounts/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),

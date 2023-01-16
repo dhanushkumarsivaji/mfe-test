@@ -3,23 +3,22 @@ import { NavLink } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 
 const LINKS = [
+  // {
+  //   path: "/",
+  //   name: "Home",
+  // },
   {
-    path: "/",
-    name: "Home",
-  },
-  {
-    path: "/dodge/table",
+    path: "/accounts/table",
     name: "Accounts",
-  },
-  {
-    path: "/profile",
-    name: "Profile",
   },
   {
     path: "/dashboard",
     name: "Dashboard",
   },
-
+  {
+    path: "/profile",
+    name: "Profile",
+  },
   // {
   //   path: "/dodge/user",
   //   name: "User",

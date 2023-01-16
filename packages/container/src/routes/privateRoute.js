@@ -4,7 +4,6 @@ import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
-import Layout from "../layout";
 
 export const PrivateRoute = (props) => {
   const {
@@ -25,9 +24,7 @@ export const PrivateRoute = (props) => {
       render={(routeRenderProps) => (
         <>
           <AuthenticatedTemplate>
-            <Layout>
               <Component {...routeRenderProps} token={token} acquireToken={acquireToken} />
-            </Layout>
           </AuthenticatedTemplate>
           <UnauthenticatedTemplate>
             <Redirect

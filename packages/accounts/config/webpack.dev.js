@@ -15,10 +15,10 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'dodgetable',
+      name: 'accounts',
       filename: 'remoteEntry.js',
       exposes: {
-        './DodgetableApp': './src/bootstrap',
+        './AccountsApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),

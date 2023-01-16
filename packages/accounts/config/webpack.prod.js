@@ -7,14 +7,14 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/dodgetable/latest/',
+    publicPath: '/accounts/latest/',
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'dodgetable',
+      name: 'accounts',
       filename: 'remoteEntry.js',
       exposes: {
-        './DodgetableApp': './src/bootstrap',
+        './AccountsApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),

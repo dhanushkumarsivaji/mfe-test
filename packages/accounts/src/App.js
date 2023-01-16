@@ -40,9 +40,9 @@ export default ({ history, acquireToken }) => {
 
       <Router history={history}>
         <Switch>
-          <Route path="/dodge/table" ><Table data={res} loading={loading}/> </Route>
-          <Route path="/dodge/edit" component={Edit} />
-          <Route path="/dodge/user" component={User} />
+          <Route path="/accounts/table" ><Table data={res} loading={loading}/> </Route>
+          <Route path="/accounts/edit" component={Edit} />
+          <Route path="/accounts/user" component={User} />
         </Switch>
       </Router>
     </div>

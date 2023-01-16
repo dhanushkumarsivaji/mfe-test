@@ -115,7 +115,7 @@ export default function TableComponent({
 
   const handleEditClick = (row) => {
     sessionStorage.setItem('row', JSON.stringify(row))
-    history.push('/dodge/edit')
+    history.push('/accounts/edit')
   }
 
   const getTransactionData = () => {

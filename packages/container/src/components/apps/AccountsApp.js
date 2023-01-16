@@ -1,4 +1,4 @@
-import { mount } from 'dodgetable/DodgetableApp';
+import { mount } from 'accounts/AccountsApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 

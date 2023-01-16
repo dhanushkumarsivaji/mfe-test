@@ -5,7 +5,7 @@ import { ProfileData } from "./ProfileData";
 import { WelcomeName } from "./WelcomeName";
 import { callMsGraph } from '../utils/fetch';
 
-export const Profile = () => {
+const Profile = () => {
     const { instance, accounts } = useMsal();
     const [graphData, setGraphData] = useState(null);
 
@@ -43,3 +43,5 @@ export const Profile = () => {
         </div>
     )
 }
+
+export default Profile;
