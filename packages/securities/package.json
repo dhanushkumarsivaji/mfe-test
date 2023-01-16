@@ -17,6 +17,7 @@
     "axios": "^1.2.2",
     "devextreme": "^22.2.3",
     "devextreme-react": "^22.2.3",
+    "dotenv-webpack": "^8.0.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "^18.2.0",

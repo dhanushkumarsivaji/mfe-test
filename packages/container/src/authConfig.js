@@ -12,9 +12,8 @@ import { LogLevel } from "@azure/msal-browser";
  */
 export const msalConfig = {
   auth: {
-    clientId: "d8c751a8-1726-4d18-bfeb-60c42d765b70", //"Enter_the_Application_Id_Here",
-    authority:
-      "https://login.microsoftonline.com/abb1caf4-e10d-469d-bb7e-c6942e3f415a", //"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
+    clientId: process.env.REACT_APP_CLIENT_ID, //"Enter_the_Application_Id_Here",
+    authority: process.env.REACT_APP_AUTHORITY, //"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
     redirectUri: "/",
   },
   cache: {
@@ -59,7 +58,7 @@ export const loginRequest = {
 };
 
 export const customApiRequest = {
-  scopes: ["api://bdf86608-28fe-4bc4-a579-63e7a1984219/User.Read"],
+  scopes: [process.env.REACT_APP_API_URL],
 };
 // api://bdf86608-28fe-4bc4-a579-63e7a1984219/User.Read
 /**
@@ -67,7 +66,7 @@ export const customApiRequest = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 export const graphConfig = {
-  graphMeEndpoint: "https://graph.microsoft.com/v1.0/me", //"Enter_the_Graph_Endpoint_Herev1.0/me",
+  graphMeEndpoint: process.env.REACT_APP_GRAPH_END_POINT, //"Enter_the_Graph_Endpoint_Herev1.0/me",
 };
 
 // const pca = new PublicClientApplication({

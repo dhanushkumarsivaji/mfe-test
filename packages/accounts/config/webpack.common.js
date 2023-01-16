@@ -1,3 +1,6 @@
+const Dotenv = require('dotenv-webpack');
+
+
 module.exports = {
   module: {
     rules: [
@@ -18,4 +21,7 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new Dotenv()
+  ],
 };
