@@ -41,10 +41,7 @@ const LINKS = [
   // },
 ];
 
- 
-
 const SidebarContainer = styled('div')(() => ({
-
   margin: '0',
   padding: 0,
   height: '100vh',

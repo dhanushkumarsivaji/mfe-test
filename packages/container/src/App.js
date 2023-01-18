@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { ErrorBoundary } from "react-error-boundary";
+import "devextreme/dist/css/dx.light.css";
 
 import Progress from "./components/Progress";
 import NotFound from "./components/NotFound";

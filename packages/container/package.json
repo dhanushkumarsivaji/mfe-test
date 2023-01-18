@@ -17,6 +17,8 @@
     "@tanstack/match-sorter-utils": "^8.7.2",
     "@tanstack/react-table": "^8.7.4",
     "axios": "^1.2.2",
+    "devextreme": "^22.2.3",
+    "devextreme-react": "^22.2.3",
     "dotenv-webpack": "^8.0.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
