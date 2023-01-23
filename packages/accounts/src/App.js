@@ -7,9 +7,11 @@ import User from "./components/user";
 import { updateUserDetails } from "./features/userSlice";
 import useGetApi from "./hooks/useGetApi";
 
-export default ({ history, acquireToken }) => {
+export default ({ history, acquireToken, isAuthenticated = false }) => {
 
   const [token, setToken] = useState('')
+  const [ renderApplication, setRenderApplication] = useState(false)
+
 
   const getToken = async () => {
        let isToken  = await acquireToken();
@@ -21,6 +23,10 @@ export default ({ history, acquireToken }) => {
   useEffect(() => {
     getToken()
   },[])
+
+  useEffect(() => {
+    setRenderApplication(isAuthenticated)
+  },[isAuthenticated])
 
 
   const dispatch = useDispatch()
@@ -35,7 +41,7 @@ export default ({ history, acquireToken }) => {
     result: { res, loading, error, status },
   } = useGetApi('accounts', token);
 
-  return (
+  return !renderApplication ? <h1 style={{display:'flex', justifyContent:'center', alignItems: 'center', marginTop:'100px'}}>User needs to be authenticated before accessing the Accounts page</h1>: (
     <div>
 
       <Router history={history}>

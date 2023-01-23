@@ -6,7 +6,7 @@ import App from './App';
 
 
 // Mount function to start up the app
-const mount = (el, { onNavigate, defaultHistory, initialPath, token, acquireToken }) => {
+const mount = (el, { onNavigate, defaultHistory, initialPath, token, acquireToken, isAuthenticated }) => {
 
   const root = ReactDOM.createRoot(el)
 
@@ -20,7 +20,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath, token, acquireToke
     history.listen(onNavigate);
   }
 
-  root.render(<App history={history} token={token} acquireToken={acquireToken}/>);
+  root.render(<App history={history} token={token} acquireToken={acquireToken} isAuthenticated={isAuthenticated}/>);
 
   return {
     onParentNavigate({ pathname: nextPathname }) {

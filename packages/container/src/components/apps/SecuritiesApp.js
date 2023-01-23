@@ -2,7 +2,7 @@ import { mount } from 'securities/SecuritiesApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default ({token, acquireToken}) => {
+export default ({token, acquireToken, isAuthenticated}) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -17,7 +17,8 @@ export default ({token, acquireToken}) => {
         }
       },
       token,
-      acquireToken
+      acquireToken,
+      isAuthenticated
     });
 
     history.listen(onParentNavigate);

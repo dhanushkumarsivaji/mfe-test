@@ -3,7 +3,7 @@ import ErrorBoundary from "./ErrorBoundary";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "D&C/Atoms/ErrorBoundary",
+  title: "D&C/Molecules/ErrorBoundary",
   component: ErrorBoundary,
 };
 

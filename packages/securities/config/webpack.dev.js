@@ -9,6 +9,9 @@ const devConfig = {
   output: {
     publicPath: 'http://localhost:3006/',
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   devServer: {
     port: 3006,
     historyApiFallback: true,

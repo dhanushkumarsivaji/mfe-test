@@ -1,51 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import {
-  Paper,
-  Dialog,
-  Button,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  IconButton,
-  Typography,
-  TextField,
-  Divider,
-  DialogContentText,
-} from "@mui/material";
-import { faker } from "@faker-js/faker";
-import CircularProgress from "@mui/material/CircularProgress";
-import DataGrid, {
-  Column,
-  Grouping,
-  GroupPanel,
-  Pager,
-  Paging,
-  SearchPanel,
-  Export,
-  StateStoring,
-  Sorting,
-  ColumnChooser,
-  FilterRow,
-  HeaderFilter,
-} from "devextreme-react/data-grid";
-import { styled } from "@mui/material/styles";
-import CloseIcon from "@mui/icons-material/Close";
-import { exportDataGrid } from "devextreme/pdf_exporter";
-import { exportDataGrid as exportExcelGrid } from "devextreme/excel_exporter";
+import React, { useCallback, useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-    width: "600px",
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
-
+import { exportDataGrid } from "devextreme/pdf_exporter";
+import CircularProgress from "@mui/material/CircularProgress";
+import { exportDataGrid as exportExcelGrid } from "devextreme/excel_exporter";
+import Securities from "../../components/organisms/securities";
 
 const LoaderComponent = () => {
   return (
@@ -65,8 +25,7 @@ const LoaderComponent = () => {
   );
 };
 
-
-export default function Securities({data, loading}) {
+export default function Index({ data, loading }) {
   const columns = [
     {
       id: 1,
@@ -125,11 +84,8 @@ export default function Securities({data, loading}) {
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteDummy, setDeleteDummy] = useState(null);
   const [editLayout, setEditLayout] = useState(null);
+  const [gridData, setGridRef] = useState(null);
   let sessionStorageName = "security-layouts";
-  const [store, setStore] = useState([]);
-  const gridref = useRef(null);
-
-
 
   useEffect(() => {
     let selected = JSON.parse(
@@ -148,7 +104,6 @@ export default function Securities({data, loading}) {
       JSON.parse(sessionStorage.getItem(sessionStorageName));
     if (layoutDataFromSession) setLayouts(layoutDataFromSession);
   }, [sessionStorage.getItem(sessionStorageName)]);
-
 
   const pageSizes = [10, 25, 50, 100];
   const exportFormats = ["xlsx", "pdf"];
@@ -332,7 +287,6 @@ export default function Securities({data, loading}) {
       e.cancel = true;
     }
   });
-  let gridData;
   const handleClick = () => {
     let sessionLayout = JSON.parse(sessionStorage.getItem(sessionStorageName));
 
@@ -375,172 +329,38 @@ export default function Securities({data, loading}) {
     return layout;
   }, [layout]);
 
-  return loading ? ( <LoaderComponent /> ) : (
-    <Paper sx={{ pt: 3 }}>
-      <Button onClick={() => setOpen(true)} style={{ textTransform: "none" }}>
-        Layouts
-      </Button>
-      <Button
-        style={{ textTransform: "none" }}
-        onClick={() => setOpenCreatLayout(true)}
-      >
-        Save Layout
-      </Button>
-      <DataGrid
-        dataSource={data}
-        allowColumnReordering={true}
-        rowAlternationEnabled={true}
-        showBorders={true}
-        onExporting={onExporting}
-        ref={(ref) => (gridData = ref)}
-      >
-        <GroupPanel visible={true} />
-        <SearchPanel visible={true} highlightCaseSensitive={true} />
-        <Grouping autoExpandAll={false} />
-        <StateStoring enabled={true} customLoad={loadState} type="custom" />
-        <Sorting mode="multiple" />
-        <Export enabled={true} formats={exportFormats} />
-        <FilterRow visible={true} />
-        <HeaderFilter visible={true} />
-        <ColumnChooser enabled={true} mode="select" />
-        {useLayout.map(({ dataField, caption, dataType, groupIndex }) => (
-          <Column
-            dataField={dataField}
-            caption={caption}
-            dataType={dataType}
-            groupIndex={groupIndex}
-            key={caption}
-          />
-        ))}
-
-        <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
-        <Paging defaultPageSize={10} />
-      </DataGrid>
-      <BootstrapDialog
-        onClose={() => setOpen(false)}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={() => setOpen(false)}
-        >
-          LayOuts
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Typography>Available layouts</Typography>
-          {layOuts.map((item, index) => (
-            <div key={index}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  margin: "10px 0px",
-                }}
-              >
-                <Button
-                  key={item.layOutName}
-                  style={{
-                    textTransform: "none",
-                    backgroundColor: item.isSelected ? "green" : "",
-                    color: item.isSelected ? "white" : "ActiveBorder",
-                  }}
-                  onClick={() => handleSelect(item, index)}
-                >
-                  {item.layOutName}
-                </Button>
-                <div>
-                  <Button onClick={() => handleEdit(item, index)}>Edit</Button>
-                  <Button onClick={() => handleDelete(index)}>Delete</Button>
-                </div>
-              </div>
-              <Divider />
-            </div>
-          ))}
-          <br />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            style={{ textTransform: "none" }}
-            onClick={handleSelectLayout}
-          >
-            Select Layout
-          </Button>
-          <Button style={{ textTransform: "none" }} onClick={handleDefault}>
-            Set Default
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={openCreatLayout}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
-          {editLayout !== null ? "Edit Layout" : "Create Layout"}
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <TextField
-            name="layOutName"
-            onChange={handleChange}
-            value={input}
-            width={100}
-            label="Layout Name"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button style={{ textTransform: "none" }} onClick={handleClick}>
-            {editLayout !== null ? "Update Layout" : "Create Layout"}
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-      <Dialog
-        open={openDialog}
-        onClose={() => setOpenDialog(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title"></DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this account?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={deleteLayout}>Confirm</Button>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-    </Paper>
-  );
-}
-// <Summary>
-//           <GroupItem column="price" summaryType="sum" alignByColumn={true} />
-//         </Summary>
-
-function BootstrapDialogTitle(props) {
-  const { children, onClose, ...other } = props;
-
-  return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-      {children}
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
+  return loading ? (
+    <LoaderComponent />
+  ) : (
+    <Securities
+      data={data}
+      useLayout={useLayout}
+      setUseLayout={setUseLayout}
+      open={open}
+      setOpen={setOpen}
+      openCreatLayout={openCreatLayout}
+      setOpenCreatLayout={setOpenCreatLayout}
+      initialLayoutColumns={initialLayoutColumns}
+      layOuts={layOuts}
+      openDialog={openDialog}
+      pageSizes={pageSizes}
+      exportFormats={exportFormats}
+      handleSelect={handleSelect}
+      handleDefault={handleDefault}
+      handleSelectLayout={handleSelectLayout}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      handleDelete={handleDelete}
+      handleEdit={handleEdit}
+      deleteLayout={deleteLayout}
+      handleClose={handleClose}
+      onExporting={onExporting}
+      handleClick={handleClick}
+      loadState={loadState}
+      setGridRef={setGridRef}
+      editLayout={editLayout}
+      input={input}
+      setOpenDialog={setOpenDialog}
+    />
   );
 }
