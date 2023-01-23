@@ -32,7 +32,7 @@ module.exports = {
 
     // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.
 
-    config.module.rules[0].exclude = [/node_modules\/(?!(gatsby)\/)/];
+    // config.module.rules[0].exclude = [/node_modules\/(?!(gatsby)\/)/];
 
     // use installed babel-loader which is v8.0-beta (which is meant to work with @babel/core@7)
 
