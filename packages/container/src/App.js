@@ -12,6 +12,7 @@ import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
 
 import { customApiRequest, loginRequest } from "./authConfig";
+import LayoutDesign from './layout/figma';
 
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
 const MarketingPage = lazy(() => import("./layout/home"));
@@ -60,6 +61,12 @@ export default () => {
               onSignIn={onSignIn}
               isAuthenticated={isAuthenticated}
             />
+            <PublicRoute
+            path="/figma"
+            component={LayoutDesign}
+            onSignIn={onSignIn}
+            isAuthenticated={isAuthenticated}
+          />
             <PrivateRoute
               path="/dashboard"
               component={DashboardPage}
