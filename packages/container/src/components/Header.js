@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,7 +15,17 @@ import ListSVG from "../assets/list";
 import QuestionSVG from "../assets/question";
 import SearchSVG from "../assets/search";
 
-const Icons = styled("div")(({ theme }) => ({
+
+const LogoContainer = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  "& img": {
+    maxWidth: "240px",
+    maxHeight: "80px" 
+  }
+}));
+
+const IconsContainer = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   "& span": {
@@ -27,73 +37,72 @@ const Icons = styled("div")(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    // paddingBottom:'1em',
     "& svg": {
       width: "24px",
       height: "24px",
-      marginBottom: '14px'
+      marginBottom: "14px",
     },
     "&.active": {
-      '&::before': {
+      "&::before": {
         content: '""',
-        position: 'absolute',
-        height: '5px',
+        position: "absolute",
+        height: "5px",
         left: 0,
         bottom: 0,
-        width: '100%',
-        backgroundColor: '#80A2C4',
-      }
+        width: "100%",
+        backgroundColor: "#80A2C4",
+      },
     },
   },
 }));
 
 export default function Header({ isSignedIn, onSignOut }) {
-
-  const [ activeIndex, setActiveIndex ] = useState(localStorage?.activeIndex ? Number(localStorage?.activeIndex) : 0 )
-
+  const [activeIndex, setActiveIndex] = useState(
+    localStorage?.activeIndex ? Number(localStorage?.activeIndex) : 0
+  );
 
   const handleClick = (index) => {
-      localStorage.setItem('activeIndex' , index)
-      setActiveIndex(index)
-  }
+    localStorage.setItem("activeIndex", index);
+    setActiveIndex(index);
+  };
   const onClick = () => {
     if (isSignedIn && onSignOut) {
       onSignOut();
     }
   };
 
-  const IconsList = [
+  const iconsList = [
     {
       component: <HomeSVG />,
-      link: '/home'
+      link: "/home",
     },
     {
       component: <ListSVG />,
-      link: '/list'
+      link: "/list",
     },
     {
       component: <CalenderSVG />,
-      link: '/calender'
+      link: "/calender",
     },
     {
       component: <BookmarkSVG />,
-      link: '/bookmark'
+      link: "/bookmark",
     },
     {
       component: <FolderSVG />,
-      link: '/folder'
+      link: "/folder",
     },
     {
       component: <KeyboardSVG />,
-      link: '/keyboard'
+      link: "/keyboard",
     },
     {
       component: <QuestionSVG />,
-      link: '/question'
+      link: "/question",
     },
     {
       component: <SearchSVG />,
-      link: '/search'
+      link: "/search",
     },
   ];
 
@@ -111,24 +120,38 @@ export default function Header({ isSignedIn, onSignOut }) {
             height: "80px",
           }}
         >
-          <div style={{display:'flex', flexDirection:'column'}}>
+          <LogoContainer>
             <img
               src={Logo}
-              style={{ maxWidth: "240px", maxHeight: "80px" }}
+              style={{ }}
               alt="Dodge & Cox"
               data-testid="brand-logo"
             />
-            <span style={{display:'flex', justifyContent:'end', fontSize:'12px', margin: '0', color:'black'}}>Enterprise Workstation STG 3.5.0.3</span>
-          </div>
+            <Typography
+              variant="body1"
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                fontSize: "12px",
+                margin: "0",
+                color: "black",
+              }}
+            >
+              Enterprise Workstation STG 3.5.0.3
+            </Typography>
+          </LogoContainer>
 
-
-          <Icons>
-            {IconsList.map((icon, index) => (
-              <span key={index} className={index === activeIndex ? "active" : ""} onClick={() => handleClick(index)}>
+          <IconsContainer>
+            {iconsList.map((icon, index) => (
+              <span
+                key={index}
+                className={index === activeIndex ? "active" : ""}
+                onClick={() => handleClick(index)}
+              >
                 {icon.component}
               </span>
             ))}
-          </Icons>
+          </IconsContainer>
         </Toolbar>
       </AppBar>
     </React.Fragment>
