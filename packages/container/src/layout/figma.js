@@ -2,6 +2,8 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Logo from "../assets/footer-logo.png"
+import Header from "../components/Header";
+import NeedHelp from "../components/needHelp";
 
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
@@ -30,6 +32,9 @@ Dodge &amp; Cox Funds are distributed by Foreside Fund Services, LLC, which is n
 
 const Footer = () => {
   return (
+    <>
+    <Header/>
+    <NeedHelp/>
     <FooterSectionContainer>
       <Grid container spacing={2}>
         <Grid item xs={8}>
@@ -37,6 +42,7 @@ const Footer = () => {
         </Grid>
       </Grid>
     </FooterSectionContainer>
+    </>
   );
 };
 

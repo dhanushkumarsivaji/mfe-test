@@ -20,6 +20,7 @@ const ProfilePage = lazy(() => import("./layout/profile"));
 const DashboardPage = lazy(() => import("./layout/dashboard"));
 const AccountsPage = lazy(() => import("./layout/accounts"));
 const SecuritiesPage = lazy(() => import("./layout/securities"));
+import './index.css'
 
 export default () => {
   const isAuthenticated = useIsAuthenticated();
