@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import NeedHelp from "../components/needHelp";
 import ApplicationGroups from "../components/ApplicationGroup";
 import GreetingText from "../components/GreetingText";
+import Card from "../components/Card";
 
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
@@ -45,16 +46,54 @@ Dodge &amp; Cox Funds are distributed by Foreside Fund Services, LLC, which is n
 </p>
 </div>`;
 
+const cardsData = [
+  {
+    header: 'To Do',
+    desc: 'Upcoming events (None so far)',
+    subDesc: "Don't miss scheduled events",
+    events: [
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    header: 'Scheduled Reporting',
+    desc: 'Upcoming reporting (None so far)',
+    subDesc: "List of scheduled reporting events",
+    events: [
+      {},
+    ]
+  },
+  {
+    header: 'Favorites',
+    desc: 'Upcoming reporting (None so far)',
+    subDesc: "As you frequent applications, you can bookmark them for easy access on this homepage.",
+    events: [
+      {},
+      {}
+    ]
+  }
+]
+
 const Footer = () => {
   return (
     <>
       <Header />
       <MainSectionContainer>
         <GreetingText />
+        <Grid container spacing={{ xs: 2, md: 2, lg: 4 }} style={{display: 'flex', flexWrap: 'wrap'}}>
+          {cardsData.map((val, index) => (
+            <Grid item xs={12} sm={12} md={4} key={index} >
+                <Card data={val}/>
+            </Grid>
+          ))}
+        </Grid>
+
         <ApplicationGroups />
       </MainSectionContainer>
       <NeedHelp />
-      <div style={{  backgroundColor: "#3A547C",}}>
+      <div style={{ backgroundColor: "#3A547C" }}>
         <FooterSectionContainer>
           <Grid container spacing={2}>
             <Grid item xs={8}>
