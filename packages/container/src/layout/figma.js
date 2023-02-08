@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import Logo from "../assets/footer-logo.png"
 import Header from "../components/Header";
 import NeedHelp from "../components/needHelp";
+import ApplicationGroups from "../components/ApplicationGroup";
+import GreetingText from "../components/GreetingText";
 
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
@@ -34,6 +36,8 @@ const Footer = () => {
   return (
     <>
     <Header/>
+    <GreetingText />
+    <ApplicationGroups />
     <NeedHelp/>
     <FooterSectionContainer>
       <Grid container spacing={2}>

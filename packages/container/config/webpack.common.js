@@ -1,5 +1,6 @@
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   module: {
@@ -32,13 +33,20 @@ module.exports = {
         test: /.(ttf|woff|woff2)$/,
         type: "asset/resource",
       },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+      //   exclude: /node_modules/,
+      //   use: ['file-loader?name=[name].[ext]'] // ?name=[name].[ext] is only necessary to preserve the original file name
+      // }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      
+      favicon: './public/favicon.ico',
+      manifest: "./public/manifest.json",
     }),
-    new Dotenv()
+    new Dotenv(),
+    // new CopyWebpackPlugin({patterns: [{from: 'public' }]}),
   ],
 };

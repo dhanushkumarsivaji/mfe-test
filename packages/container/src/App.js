@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { ErrorBoundary } from "react-error-boundary";
+import Favicon from 'react-favicon';
+
 import "devextreme/dist/css/dx.light.css";
 
 import Progress from "./components/Progress";
@@ -53,6 +55,7 @@ export default () => {
       FallbackComponent={ErrorBoundaryComponent}
       onReset={() => {}}
     >
+      <Favicon url="https://www.dodgeandcox.com/etc.clientlibs/dodgeandcox/clientlibs/clientlib-site/resources/images/favicon.ico" />
       <div>
         <Suspense fallback={<Progress />}>
           <Switch>
