@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 const GreetingText = () => {
   return (
-    <div style={{margin: '46px 70px 24px 70px'}}>
+    <div style={{margin: '46px 0px 24px 0px'}}>
       <Typography
         variant="h1"
         sx={{

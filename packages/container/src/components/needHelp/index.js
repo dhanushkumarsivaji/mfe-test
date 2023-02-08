@@ -3,9 +3,18 @@ import { styled } from "@mui/material/styles";
 import Typography, { typographyClasses } from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
+
+const Container = styled("div")(() => ({
+  backgroundColor: "#EDEDED"
+}));
+
 const NeedHelpContainer = styled("div")(() => ({
-  backgroundColor: "#EDEDED",
-  padding: "60px 70px 80px 70px",
+  padding: "60px 0px 80px 0px",
+  maxWidth: "1440px",
+  margin: "auto",
+  "@media (max-width: 1438px)": {
+    margin: "0 16px",
+  },
 }));
 
 const NeedHelpSectionContainer = styled("div")(() => ({
@@ -46,6 +55,7 @@ const StyledLink = styled(Link)(() => ({
 
 const NeedHelp = () => {
   return (
+    <Container> 
     <NeedHelpContainer>
       <NeedHelpSectionContainer>
         <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600px" }}>
@@ -83,6 +93,7 @@ const NeedHelp = () => {
         </SupportLinksContainer>
       </NeedHelpSectionContainer>
     </NeedHelpContainer>
+    </Container>
   );
 };
 

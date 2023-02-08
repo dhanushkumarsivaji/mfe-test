@@ -15,6 +15,17 @@ import ListSVG from "../assets/list";
 import QuestionSVG from "../assets/question";
 import SearchSVG from "../assets/search";
 
+const ContentContainer = styled('div')(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '24px 0',
+  maxWidth: '1440px',
+  margin: 'auto',
+  '@media (max-width: 1438px)': {
+    margin: '0 16px'
+  }
+}));
 
 const LogoContainer = styled("div")(() => ({
   display: "flex",
@@ -113,13 +124,8 @@ export default function Header({ isSignedIn, onSignOut }) {
         elevation={0}
         sx={{ backgroundColor: "common.white" }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            height: "80px",
-          }}
-        >
+      <div>
+        <ContentContainer>
           <LogoContainer>
             <img
               src={Logo}
@@ -152,7 +158,8 @@ export default function Header({ isSignedIn, onSignOut }) {
               </span>
             ))}
           </IconsContainer>
-        </Toolbar>
+          </ContentContainer>
+          </div>
       </AppBar>
     </React.Fragment>
   );

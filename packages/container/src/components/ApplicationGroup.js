@@ -3,14 +3,13 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { styled } from "@mui/material/styles";
 import ExpandLess from "../assets/expandLess";
 
 const ApplicationGroupContainer = styled("div")(() => ({
   backgroundColor: "#EDEDED",
   padding: "26px 18px",
-  margin: '26px 70px 38px 70px'
+  margin: '26px 0px 38px 0px'
 }));
 
 const ApplicationGroupHeaderIcon = styled("div")(() => ({

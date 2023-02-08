@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Logo from "../assets/footer-logo.png"
+import Logo from "../assets/footer-logo.png";
 import Header from "../components/Header";
 import NeedHelp from "../components/needHelp";
 import ApplicationGroups from "../components/ApplicationGroup";
@@ -10,15 +10,28 @@ import GreetingText from "../components/GreetingText";
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
   color: "white",
-  backgroundColor: "#3A547C",
-  padding: "42px 0 26px 68px",
+  padding: "42px 0 26px 0px",
   lineHeight: "24px",
   backgroundImage: `url(${Logo})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'right bottom',
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right bottom",
   "& a": {
     color: "white",
     textDecoration: "none",
+  },
+  maxWidth: "1440px",
+  margin: "auto",
+  "@media (max-width: 1438px)": {
+    margin: "0 16px",
+  },
+}));
+
+const MainSectionContainer = styled("main")(() => ({
+  minHeight: "74vh",
+  maxWidth: "1440px",
+  margin: "auto",
+  "@media (max-width: 1438px)": {
+    margin: "0 16px",
   },
 }));
 
@@ -35,17 +48,21 @@ Dodge &amp; Cox Funds are distributed by Foreside Fund Services, LLC, which is n
 const Footer = () => {
   return (
     <>
-    <Header/>
-    <GreetingText />
-    <ApplicationGroups />
-    <NeedHelp/>
-    <FooterSectionContainer>
-      <Grid container spacing={2}>
-        <Grid item xs={8}>
-          <div dangerouslySetInnerHTML={{ __html: textData }}></div>
-        </Grid>
-      </Grid>
-    </FooterSectionContainer>
+      <Header />
+      <MainSectionContainer>
+        <GreetingText />
+        <ApplicationGroups />
+      </MainSectionContainer>
+      <NeedHelp />
+      <div style={{  backgroundColor: "#3A547C",}}>
+        <FooterSectionContainer>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <div dangerouslySetInnerHTML={{ __html: textData }}></div>
+            </Grid>
+          </Grid>
+        </FooterSectionContainer>
+      </div>
     </>
   );
 };
