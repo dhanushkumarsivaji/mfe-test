@@ -61,7 +61,7 @@ export default () => {
           <Switch>
             <PublicRoute
               path="/auth"
-              component={AuthPage}
+              component={LayoutDesign}
               onSignIn={onSignIn}
               isAuthenticated={isAuthenticated}
             />
