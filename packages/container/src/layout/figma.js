@@ -7,6 +7,7 @@ import NeedHelp from "../components/needHelp";
 import ApplicationGroups from "../components/ApplicationGroup";
 import GreetingText from "../components/GreetingText";
 import Card from "../components/Card";
+import Table from "../container";
 
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
@@ -82,6 +83,7 @@ const Footer = () => {
       <Header />
       <MainSectionContainer>
         <GreetingText />
+        <Table />
         <Grid container spacing={{ xs: 2, md: 2, lg: 4 }} style={{display: 'flex', flexWrap: 'wrap'}}>
           {cardsData.map((val, index) => (
             <Grid item xs={12} sm={12} md={4} key={index} >

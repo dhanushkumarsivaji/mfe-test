@@ -25,6 +25,8 @@
     "devextreme": "^22.2.3",
     "devextreme-react": "^22.2.3",
     "dotenv-webpack": "^8.0.1",
+    "exceljs": "^4.3.0",
+    "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "lodash": "^4.17.21",
