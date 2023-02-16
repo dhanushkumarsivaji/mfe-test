@@ -18,9 +18,14 @@ const InputComponent = (props) => {
     const { label, id, errors, error } = props
 
     function renderErrorMessage(errors){
+      console.log(errors)
       switch (errors.type) {
         case 'required':
           return 'This field is required'
+        case 'minLength':
+           return 'Please type more than 2 characters'
+        case 'maxLength':
+           return 'Please type not more than 24 characters'
         default:
           break;
       }

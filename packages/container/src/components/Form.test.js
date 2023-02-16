@@ -1,8 +1,8 @@
 import React from "react";
 import Form from "./Form";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, act} from "@testing-library/react";
 
-describe.only("Form", () => {
+describe.only("grid export form", () => {
   const exportFormatsData = [
     {
       id: "xlsx",
@@ -21,8 +21,8 @@ describe.only("Form", () => {
   const setIncludeAllColumnsInExport = jest.fn();
   const onSubmit = jest.fn();
 
-  test("should watch input correctly", () => {
-    const { getByText } = render(
+  test("renders default state", () => {
+    const { getByTestId } = render(
       <Form
         onSubmit={onSubmit}
         exportFormatsData={exportFormatsData}
@@ -31,24 +31,90 @@ describe.only("Form", () => {
       />
     );
 
-    fireEvent.input(getByText("exportfilename"), {
-      target: {
-        value: "test",
-      },
-    });
+    const exportFileFormatInput = getByTestId("exportfileformat");
+    const exportFilenameInput = getByTestId("exportfilename");
+    const exportSubmitButton = getByTestId("submit");
+    const exportCancelButton = getByTestId("cancel-btn");
+    const exportAllColumnsCheckbox = getByTestId('include-all-columns-checkbox')
 
-    screen.debug();
+    expect(exportFileFormatInput.value).toEqual("xlsx");
+    expect(exportFilenameInput.value).toEqual("");
+    expect(exportSubmitButton).toHaveClass("Mui-disabled");
+    expect(exportCancelButton).toBeInTheDocument();
+    expect(exportAllColumnsCheckbox).toBeInTheDocument();
+    // expect(checkbox).toHaveProperty('checked', false)
 
-    // expect(getByTestId("exportfilename").innerHTML).toEqual("Hidden message");
   });
 
-  //   test("should display correct error message", () => {
-  //     const { getByTestId, findByText } = render(<Form />);
+    test("keeps the submit button disabled when less than two character is provided in the filename input", () => {
+        const { getByTestId } = render(
+            <Form
+              onSubmit={onSubmit}
+              exportFormatsData={exportFormatsData}
+              handleExportModalClose={handleExportModalClose}
+              setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
+            />
+          );
 
-  //     getByTestId("submit");
+      const exportFilenameInput = getByTestId("exportfilename");
+        fireEvent.input(exportFilenameInput, {
+        target: {
+            value: "t",
+        },
+        });
+        const exportSubmitButton = getByTestId("submit");
+        expect(getByTestId("exportfilename").value).toEqual("t");
+        expect(exportSubmitButton).toHaveClass("Mui-disabled");
+    });
 
-  //     fireEvent.click(getByTestId("submit"));
+    test("keeps the submit button disabled when more than twenty four character is provided in the filename input", () => {
+        const { getByTestId } = render(
+            <Form
+              onSubmit={onSubmit}
+              exportFormatsData={exportFormatsData}
+              handleExportModalClose={handleExportModalClose}
+              setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
+            />
+          );
 
-  //     findByText("This field is required");
-  //   });
+      const exportFilenameInput = getByTestId("exportfilename");
+        fireEvent.input(exportFilenameInput, {
+        target: {
+            value: "asasasasasasasaasasasasasasasa",
+        },
+        });
+        const exportSubmitButton = getByTestId("submit");
+        expect(getByTestId("exportfilename").value).toEqual("asasasasasasasaasasasasasasasa");
+        expect(exportSubmitButton).toHaveClass("Mui-disabled");
+    });
+
+    test("enables the submit button when the form is filled out", async () => {
+        const { getByTestId } = render(
+            <Form
+              onSubmit={onSubmit}
+              exportFormatsData={exportFormatsData}
+              handleExportModalClose={handleExportModalClose}
+              setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
+            />
+          );
+
+      const exportFilenameInput = getByTestId("exportfilename");
+      const exportSubmitButton = getByTestId("submit");
+
+       await act(() => {
+        fireEvent.input(exportFilenameInput, {
+            target: {
+                value: "new",
+            },
+            });
+        expect(getByTestId("exportfilename").value).toEqual("new");
+      })
+      expect(exportSubmitButton).not.toHaveClass("Mui-disabled");
+
+      await act(() => {
+        fireEvent.click(exportSubmitButton);
+      })
+      expect(onSubmit).toBeCalled();
+    });
+
 });

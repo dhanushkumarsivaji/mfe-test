@@ -3,7 +3,6 @@ import { Workbook } from "exceljs";
 import saveAs from "file-saver";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { jsPDF } from "jspdf";
-import { useForm } from "react-hook-form";
 import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import ModalComponent from "../components/Modal";
 import DevExtremeGrid from "../components/devextremeGrid";
@@ -85,16 +84,6 @@ export default function HoldingsByAccount() {
   }, []);
 
 
-const { handleSubmit, formState, control } =
-  useForm({
-    mode: "onChange",
-    defaultValues: {
-      exportfileformat: "xlsx",
-      exportfilename: ""
-    },
-  });
-const { errors } = formState;
-
 const onSubmit = (data) => {
   handleGridExport(data.exportfileformat,data.exportfilename)
 }
@@ -109,10 +98,6 @@ const onSubmit = (data) => {
         setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
         exportFormatsData={exportFormatsData}
         onSubmit={onSubmit}
-        handleSubmit={handleSubmit}
-        errors={errors}
-        control={control}
-        formState={formState}
       />
       <DevExtremeGrid
         data={customers}

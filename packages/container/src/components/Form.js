@@ -1,5 +1,5 @@
 import React from "react";
-import {  Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -17,12 +17,16 @@ export default function ModalForm({
   setIncludeAllColumnsInExport,
   exportFormatsData,
   onSubmit,
-  handleSubmit,
-  errors,
-  control,
-  formState
 }) {
-
+  const { handleSubmit, formState, control } = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    defaultValues: {
+      exportfileformat: "xlsx",
+      exportfilename: "",
+    },
+  });
+  const { errors } = formState;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,6 +91,7 @@ export default function ModalForm({
                   name={"exportfileformat"}
                   error={!!error}
                   errors={errors.exportfileformat}
+                  inputProps={{ "data-testid": "exportfileformat" }}
                 />
               )}
             />
@@ -137,6 +142,8 @@ export default function ModalForm({
               control={control}
               rules={{
                 required: true,
+                minLength: 2,
+                maxLength: 24,
               }}
               render={({
                 field: { onChange, value },
@@ -152,6 +159,7 @@ export default function ModalForm({
                   id={"export-file-name-input"}
                   label={""}
                   errors={errors.exportfilename}
+                  inputProps={{ "data-testid": "exportfilename" }}
                 />
               )}
             />
@@ -207,6 +215,7 @@ export default function ModalForm({
                     onChange={() =>
                       setIncludeAllColumnsInExport((prev) => !prev)
                     }
+                    inputProps={{ 'data-testid': 'include-all-columns-checkbox' }}
                     icon={<CheckBoxOutlineBlankIcon />}
                     checkedIcon={
                       <SquareIcon
@@ -222,7 +231,11 @@ export default function ModalForm({
         </Grid>
       </DialogContent>
       <DialogActions sx={{ marginBottom: "20px" }}>
-        <Button variant="outlined" onClick={handleExportModalClose}>
+        <Button
+          variant="outlined"
+          onClick={handleExportModalClose}
+          data-testid="cancel-btn"
+        >
           Cancel
         </Button>
         <Button
@@ -230,6 +243,7 @@ export default function ModalForm({
           bgcolor="#7D594C"
           sx={{ marginRight: "22px" }}
           disabled={!formState.isValid}
+          data-testid="submit"
         >
           Export
         </Button>
