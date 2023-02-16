@@ -3,6 +3,7 @@ import { Workbook } from "exceljs";
 import saveAs from "file-saver";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { jsPDF } from "jspdf";
+import { useForm } from "react-hook-form";
 import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import ModalComponent from "../components/Modal";
 import DevExtremeGrid from "../components/devextremeGrid";
@@ -11,34 +12,15 @@ import { customers } from "./data";
 
 export default function HoldingsByAccount() {
   const grid = useRef();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [includeAllColumnsInExport, setIncludeAllColumnsInExport] =
     React.useState(false);
-  const [exportFileName, setExportFileName] = React.useState("");
-  const [exportFileFormat, setExportFileFormat] = React.useState("xlsx");
-
-  const handleExportFileName = (e) => {
-    e.preventDefault();
-    const {
-      target: { value },
-    } = e;
-    setExportFileName(value);
-  };
-
-  const handleExportFileFormat = (e) => {
-    e.preventDefault();
-    const {
-      target: { value },
-    } = e;
-    setExportFileFormat(value);
-  };
 
   const handleExportModalOpen = () => {
     setOpen(true);
   };
   const handleExportModalClose = () => {
     setIncludeAllColumnsInExport(false);
-    setExportFileName("");
     setOpen(false);
   };
 
@@ -102,6 +84,21 @@ export default function HoldingsByAccount() {
     handleExportModalClose();
   }, []);
 
+
+const { handleSubmit, formState, control } =
+  useForm({
+    mode: "onChange",
+    defaultValues: {
+      exportfileformat: "xlsx",
+      exportfilename: ""
+    },
+  });
+const { errors } = formState;
+
+const onSubmit = (data) => {
+  handleGridExport(data.exportfileformat,data.exportfilename)
+}
+
   return (
     <div>
       <ModalComponent
@@ -111,11 +108,11 @@ export default function HoldingsByAccount() {
         includeAllColumnsInExport={includeAllColumnsInExport}
         setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
         exportFormatsData={exportFormatsData}
-        handleGridExport={handleGridExport}
-        handleExportFileName={handleExportFileName}
-        handleExportFileFormat={handleExportFileFormat}
-        exportFileName={exportFileName}
-        exportFileFormat={exportFileFormat}
+        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        control={control}
+        formState={formState}
       />
       <DevExtremeGrid
         data={customers}

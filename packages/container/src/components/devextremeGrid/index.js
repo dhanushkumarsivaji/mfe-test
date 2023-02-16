@@ -98,6 +98,28 @@ export default function DevExtremeGrid({
   gridRef,
   includeAllColumnsInExport,
 }) {
+  
+
+  function optionChanged(e) {
+    if(e.fullName.includes('groupIndex')) {
+
+          setTimeout(function(){
+            var groupedColumns = e.component.getVisibleColumns().filter(x => x.groupIndex !== undefined);
+
+            if(groupedColumns.length >= 2){
+                var columns = e.component.getVisibleColumns().filter(x => x.groupIndex === undefined)
+                columns.forEach(function(element){
+                    e.component.columnOption(element.dataField, 'allowGrouping', false)
+                })
+            } else {
+                var columns = e.component.getVisibleColumns().filter(x => x.groupIndex === undefined)
+                columns.forEach(function(element) {
+                    e.component.columnOption(element.dataField, 'allowGrouping', true)
+                })
+            }   
+          })
+    }
+  }
   return (
     <DataGridContainer>
       <DataGrid
@@ -111,6 +133,7 @@ export default function DevExtremeGrid({
         rowAlternationEnabled={false}
         focusedRowEnabled={true}
           focusedRowKey={4}
+        onOptionChanged={optionChanged}
       >
         <ColumnChooser enabled={true} />
         <GroupPanel visible={true} />

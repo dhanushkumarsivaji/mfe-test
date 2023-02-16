@@ -1,6 +1,6 @@
-const Dotenv = require('dotenv-webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require("dotenv-webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const env = process.env.NODE_ENV;
 
 module.exports = {
   module: {
@@ -9,21 +9,16 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-react','@babel/preset-env' ],
-            plugins: ['@babel/plugin-transform-runtime'],
-          }
-        }
+            presets: ["@babel/preset-react", "@babel/preset-env"],
+            plugins: ["@babel/plugin-transform-runtime"],
+          },
+        },
       },
       {
         test: /\.(sass|css|scss)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ]
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /.(png|jpeg|gif|svg)$/,
@@ -42,11 +37,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/favicon.ico',
+      template: "./public/index.html",
+      favicon: "./public/favicon.ico",
       manifest: "./public/manifest.json",
     }),
-    new Dotenv(),
+    new Dotenv({
+      path: `./.env.${env === "production" ? "production" : "development"}`,
+    }),
     // new CopyWebpackPlugin({patterns: [{from: 'public' }]}),
   ],
 };

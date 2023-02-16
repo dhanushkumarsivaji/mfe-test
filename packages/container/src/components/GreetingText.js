@@ -16,7 +16,7 @@ const GreetingText = () => {
           marginBottom: '5px'
         }}
       >
-        Welcome, Jane Smith
+        Welcome, Jane Smith, {process.env.REACT_APP_NAME}
       </Typography>
       <Typography
       variant="body1"

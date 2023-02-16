@@ -82,6 +82,7 @@ const Footer = () => {
     <>
       <Header />
       <MainSectionContainer>
+      
         <GreetingText />
         <Table />
         <Grid container spacing={{ xs: 2, md: 2, lg: 4 }} style={{display: 'flex', flexWrap: 'wrap'}}>

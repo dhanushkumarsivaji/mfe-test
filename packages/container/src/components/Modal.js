@@ -2,21 +2,12 @@ import * as React from "react";
 import PropTypes from "prop-types";
 // import Button from "@mui/material/Button";
 import Button from "./Button";
-import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import { FormControlLabel, FormGroup } from "@mui/material";
-import SquareIcon from "@mui/icons-material/Square";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import SelectBoxComponent from "./Select";
-import TextInputComponent from "./Input";
+import ModalForm from "./Form";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .container-app-MuiDialogContent-root": {
@@ -69,13 +60,7 @@ export default function ModalComponent({
   open,
   handleExportModalOpen,
   handleExportModalClose,
-  handleExportFileFormat,
-  setIncludeAllColumnsInExport,
-  exportFormatsData,
-  handleGridExport,
-  exportFileName,
-  exportFileFormat,
-  handleExportFileName,
+  ...rest
 }) {
   return (
     <div>
@@ -98,182 +83,10 @@ export default function ModalComponent({
         >
           Export
         </BootstrapDialogTitle>
-        <DialogContent>
-          <Grid
-            container
-            margin="20px 0"
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={3}
-              lg={3}
-              sx={{ justifyContent: "flex-end" }}
-            >
-              <Typography
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  fontWeight: 600,
-                  "@media (max-width: 900px)": {
-                    justifyContent: "start",
-                  },
-                }}
-              >
-                Format
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={9}
-              lg={9}
-              p={"0 20px"}
-              sx={{
-                "@media (max-width: 900px)": {
-                  padding: 0,
-                },
-              }}
-            >
-              <SelectBoxComponent
-                data={exportFormatsData}
-                onChange={handleExportFileFormat}
-                value={exportFileFormat}
-                id={"export-file-format-input"}
-                label={""}
-              />
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            margin="20px 0"
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={3}
-              lg={3}
-              sx={{ justifyContent: "flex-end" }}
-            >
-              <Typography
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  fontWeight: 600,
-                  "@media (max-width: 900px)": {
-                    justifyContent: "start",
-                  },
-                }}
-              >
-                Filename
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={9}
-              lg={9}
-              p={"0 20px"}
-              sx={{
-                "@media (max-width: 900px)": {
-                  padding: 0,
-                },
-              }}
-            >
-              <TextInputComponent
-                variant="outlined"
-                value={exportFileName}
-                onChange={handleExportFileName}
-                id={"export-file-name-input"}
-                label={""}
-              />
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            margin={"20px 0"}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={3}
-              lg={3}
-              sx={{
-                justifyContent: "flex-end",
-              }}
-            >
-              <Typography
-                gutterBottom
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  visibility: "hidden",
-                  "@media (max-width: 900px)": {
-                    justifyContent: "start",
-                    display: "none",
-                  },
-                }}
-              >
-                Filename
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={9}
-              lg={9}
-              pl={"20px"}
-              sx={{
-                "@media (max-width: 900px)": {
-                  padding: 0,
-                },
-              }}
-            >
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={() =>
-                        setIncludeAllColumnsInExport((prev) => !prev)
-                      }
-                      icon={<CheckBoxOutlineBlankIcon />}
-                      checkedIcon={
-                        <SquareIcon
-                          sx={{ color: "#3A547C", border: "1px solid white" }}
-                        />
-                      }
-                    />
-                  }
-                  label="Include all column data within export"
-                />
-              </FormGroup>
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions sx={{ marginBottom: "20px" }}>
-          <Button variant="outlined" onClick={handleExportModalClose}>
-            Cancel
-          </Button>
-          <Button
-            bgcolor="#7D594C"
-            sx={{ marginRight: "22px" }}
-            onClick={() => handleGridExport(exportFileFormat, exportFileName)}
-            disabled={!exportFileName}
-          >
-            Export
-          </Button>
-        </DialogActions>
+        <ModalForm
+          handleExportModalClose={handleExportModalClose}
+          {...rest}
+        />
       </BootstrapDialog>
     </div>
   );

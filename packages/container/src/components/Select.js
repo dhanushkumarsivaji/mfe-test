@@ -1,6 +1,7 @@
 import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@mui/material';
 import { styled } from '@mui/system';
+import { isEmpty } from 'lodash';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const StyledSelectBox = styled(Select)({
@@ -15,16 +16,28 @@ function SelectBoxComponent(props) {
     const {
         data,
         id,
-        label
+        label,
+		error,
+		errors
     } = props
+
+	function renderErrorMessage(errors){
+		switch (errors.type) {
+			case 'required':
+				return 'This field is required'
+			default:
+				break;
+		}
+	}
     
 	return (
-		<FormControl fullWidth>
+		<FormControl fullWidth error={error}>
 			<InputLabel htmlFor={id}>{label}</InputLabel>
 			<StyledSelectBox
 				id={id}
                 {...props}
 				IconComponent={ExpandMoreIcon}
+				
 			>
 				{data.map((option) => (
 					<MenuItem key={option.id} value={option.id}>
@@ -32,6 +45,7 @@ function SelectBoxComponent(props) {
 					</MenuItem>
 				))}
 			</StyledSelectBox>
+			{ !isEmpty(errors) ? <FormHelperText >{renderErrorMessage(errors)}</FormHelperText> : null}
 		</FormControl>
 	);
 }
