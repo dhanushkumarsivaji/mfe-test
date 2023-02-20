@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from "react";
 import { Workbook } from "exceljs";
 import saveAs from "file-saver";
 import { exportDataGrid } from "devextreme/excel_exporter";
+import { styled } from "@mui/material/styles";
 import { jsPDF } from "jspdf";
 import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
 import ModalComponent from "../components/Modal";
@@ -9,9 +10,14 @@ import DevExtremeGrid from "../components/devextremeGrid";
 
 import { customers } from "./data";
 
+const ExportLayoutsContainer = styled("div")(() => ({
+  backgroundColor: '#DAE3F2' ,
+  padding: '22px 12px'
+}));
+
 export default function HoldingsByAccount() {
   const grid = useRef();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [includeAllColumnsInExport, setIncludeAllColumnsInExport] =
     React.useState(false);
 
@@ -90,15 +96,20 @@ const onSubmit = (data) => {
 
   return (
     <div>
-      <ModalComponent
-        handleExportModalOpen={handleExportModalOpen}
-        open={open}
-        handleExportModalClose={handleExportModalClose}
-        includeAllColumnsInExport={includeAllColumnsInExport}
-        setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
-        exportFormatsData={exportFormatsData}
-        onSubmit={onSubmit}
-      />
+    <ExportLayoutsContainer>
+    <ModalComponent
+    handleExportModalOpen={handleExportModalOpen}
+    open={open}
+    handleExportModalClose={handleExportModalClose}
+    includeAllColumnsInExport={includeAllColumnsInExport}
+    setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
+    exportFormatsData={exportFormatsData}
+    onSubmit={onSubmit}
+  />
+    </ExportLayoutsContainer>
+
+
+
       <DevExtremeGrid
         data={customers}
         gridRef={grid}

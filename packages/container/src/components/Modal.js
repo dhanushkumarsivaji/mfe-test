@@ -68,7 +68,6 @@ export default function ModalComponent({
         bgcolor="#7D594C"
         variant="outlined"
         onClick={handleExportModalOpen}
-        sx={{ marginBottom: "30px" }}
       >
         Export
       </Button>
