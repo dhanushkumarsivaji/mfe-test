@@ -2,9 +2,9 @@
   "name": "container",
   "version": "1.0.0",
   "scripts": {
-    "start": "env NODE_ENV=development webpack serve --config config/webpack.dev.js",
-    "start:prod": "env NODE_ENV=production webpack serve --config config/webpack.prod.js",
-    "build": "NODE_ENV=production webpack --config config/webpack.prod.js",
+    "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
+    "start:prod": "cross-env NODE_ENV=production webpack serve --config config/webpack.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "test": "jest --watch",

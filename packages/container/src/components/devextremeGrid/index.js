@@ -132,10 +132,10 @@ export default function DevExtremeGrid({
         showBorders={true}
         rowAlternationEnabled={false}
         focusedRowEnabled={true}
-          focusedRowKey={4}
+        focusedRowKey={4}
         onOptionChanged={optionChanged}
       >
-        <ColumnChooser enabled={true} />
+        <ColumnChooser enabled={true} mode="select"/>
         <GroupPanel visible={true} />
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />

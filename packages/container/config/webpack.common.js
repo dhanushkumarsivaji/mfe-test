@@ -42,7 +42,7 @@ module.exports = {
       manifest: "./public/manifest.json",
     }),
     new Dotenv({
-      path: `./.env.${env === "production" ? "production" : "development"}`,
+      path: `./.env.${env}`,
     }),
     // new CopyWebpackPlugin({patterns: [{from: 'public' }]}),
   ],

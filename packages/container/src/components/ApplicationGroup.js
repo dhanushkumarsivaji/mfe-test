@@ -5,11 +5,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import ExpandLess from "../assets/expandLess";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@mui/material/Link";
 
 const ApplicationGroupContainer = styled("div")(() => ({
   backgroundColor: "#EDEDED",
   padding: "26px 18px",
-  margin: '26px 0px 38px 0px'
+  margin: "26px 0px 38px 0px",
 }));
 
 const ApplicationGroupHeaderIcon = styled("div")(() => ({
@@ -29,28 +31,28 @@ export default function ApplicationGroups() {
   const data = [
     {
       title: "Client Reporting",
-      totalItems: 9,
-      desc: "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam.",
+      links: [],
     },
     {
       title: "Fixed Income Reporting",
-      totalItems: 6,
-      desc: "Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar diam eros in elit. Pellentesque convallis laoreet laoreet.",
+      links: []
     },
     {
       title: "Holdings",
-      totalItems: 65,
-      desc: "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.",
+      links: [
+        {
+          name: "By Account",
+          link: "holdings-by-account",
+        }
+      ],
     },
     {
       title: "Research",
-      totalItems: 6,
-      desc: "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.",
+      links: [],
     },
     {
       title: "Securities",
-      totalItems: 2,
-      desc: "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.",
+      links: [],
     },
   ];
 
@@ -95,11 +97,19 @@ export default function ApplicationGroups() {
                 fontFamily: "Arial",
               }}
             >
-              {val.title} {`(${val.totalItems})`}
+              {val.title} {`(${val?.links?.length})`}
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ minHeight: "118px" }}>
-            <Typography>{val.desc}</Typography>
+            <div>
+              {val?.links?.map((d, i) => (
+                  <Link component={RouterLink} to={d.link} sx={{margin: '0px 10px', fontSize:'16px', fontFamily:'Arial', color:'#3A547C', lineHeight:'24px', '&:first-of-type': {
+                    marginLeft: '0'
+                  }}}>
+                    {d.name}
+                  </Link>
+              ))}
+            </div>
           </AccordionDetails>
         </Accordion>
       ))}
