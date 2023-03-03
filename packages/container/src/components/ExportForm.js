@@ -1,9 +1,6 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, FormGroup } from "@mui/material";
 import SquareIcon from "@mui/icons-material/Square";
@@ -29,7 +26,6 @@ export default function ModalForm({
   const { errors } = formState;
 
   return (
-    <div style={{backgroundColor: '#EDEDED'}}>
     <form onSubmit={handleSubmit(onSubmit)}>
       <React.Fragment>
         <Grid
@@ -153,7 +149,7 @@ export default function ModalForm({
                     icon={<CheckBoxOutlineBlankIcon />}
                     checkedIcon={
                       <SquareIcon
-                        sx={{ color: "#3A547C", border: "1px solid white" }}
+                        sx={{ color: "#3A547C", border: "1px solid #3A547C" }}
                       />
                     }
                   />
@@ -187,6 +183,5 @@ export default function ModalForm({
   
       </Grid>
     </form>
-    </div>
   );
 }

@@ -3,7 +3,7 @@ import Button from "./Button";
 import Popover from "@mui/material/Popover";
 import ExportForm from "./ExportForm";
 
-export default function ModalComponent({
+export default function PopOverComponent({
   anchorEl,
   handleExportPopOverOpen,
   handleExportPopOverClose,

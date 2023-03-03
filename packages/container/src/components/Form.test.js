@@ -17,7 +17,7 @@ describe.only("grid export form", () => {
       name: "CSV",
     },
   ];
-  const handleExportModalClose = jest.fn();
+  const handleExportPopOverClose = jest.fn();
   const setIncludeAllColumnsInExport = jest.fn();
   const onSubmit = jest.fn();
 
@@ -26,7 +26,7 @@ describe.only("grid export form", () => {
       <Form
         onSubmit={onSubmit}
         exportFormatsData={exportFormatsData}
-        handleExportModalClose={handleExportModalClose}
+        handleExportPopOverClose={handleExportPopOverClose}
         setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
       />
     );
@@ -51,7 +51,7 @@ describe.only("grid export form", () => {
             <Form
               onSubmit={onSubmit}
               exportFormatsData={exportFormatsData}
-              handleExportModalClose={handleExportModalClose}
+              handleExportPopOverClose={handleExportPopOverClose}
               setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
             />
           );
@@ -72,7 +72,7 @@ describe.only("grid export form", () => {
             <Form
               onSubmit={onSubmit}
               exportFormatsData={exportFormatsData}
-              handleExportModalClose={handleExportModalClose}
+              handleExportPopOverClose={handleExportPopOverClose}
               setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
             />
           );
@@ -93,7 +93,7 @@ describe.only("grid export form", () => {
             <Form
               onSubmit={onSubmit}
               exportFormatsData={exportFormatsData}
-              handleExportModalClose={handleExportModalClose}
+              handleExportPopOverClose={handleExportPopOverClose}
               setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
             />
           );

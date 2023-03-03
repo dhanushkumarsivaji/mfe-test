@@ -7,8 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const StyledSelectBox = styled(Select)({
 	borderRadius: '0px',
 	background: '#fff',
-    '& .MuiSelect-select': {
-        padding: '12px 14px'
+    '& .container-app-MuiOutlinedInput-input': {
+        padding: '13px 14px'
     }
 });
 

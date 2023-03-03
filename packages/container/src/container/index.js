@@ -5,28 +5,30 @@ import { exportDataGrid } from "devextreme/excel_exporter";
 import { styled } from "@mui/material/styles";
 import { jsPDF } from "jspdf";
 import { exportDataGrid as exportDataGridToPdf } from "devextreme/pdf_exporter";
-import ModalComponent from "../components/Modal";
+import PopOver from "../components/PopOver";
 import DevExtremeGrid from "../components/devextremeGrid";
 
 import { customers } from "./data";
 
 const ExportLayoutsContainer = styled("div")(() => ({
   backgroundColor: '#DAE3F2' ,
-  padding: '22px 12px'
+  padding: '22px 12px',
+  display: 'flex',
+  justifyContent: 'end'
 }));
 
 export default function HoldingsByAccount() {
   const grid = useRef();
-  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [includeAllColumnsInExport, setIncludeAllColumnsInExport] =
     React.useState(false);
 
-  const handleExportModalOpen = () => {
-    setOpen(true);
+  const handleExportPopOverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
-  const handleExportModalClose = () => {
+  const handleExportPopOverClose = () => {
     setIncludeAllColumnsInExport(false);
-    setOpen(false);
+    setAnchorEl(null);
   };
 
   const exportFormatsData = [
@@ -86,7 +88,7 @@ export default function HoldingsByAccount() {
       }
     }
 
-    handleExportModalClose();
+    handleExportPopOverClose();
   }, []);
 
 
@@ -97,10 +99,10 @@ const onSubmit = (data) => {
   return (
     <div>
     <ExportLayoutsContainer>
-    <ModalComponent
-    handleExportModalOpen={handleExportModalOpen}
-    open={open}
-    handleExportModalClose={handleExportModalClose}
+    <PopOver
+    handleExportPopOverOpen={handleExportPopOverOpen}
+    anchorEl={anchorEl}
+    handleExportPopOverClose={handleExportPopOverClose}
     includeAllColumnsInExport={includeAllColumnsInExport}
     setIncludeAllColumnsInExport={setIncludeAllColumnsInExport}
     exportFormatsData={exportFormatsData}
