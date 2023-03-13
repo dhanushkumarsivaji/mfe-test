@@ -17,6 +17,7 @@ export default function ModalForm({
   setIncludeAllColumnsInExport,
   exportFormatsData,
   onSubmit,
+  children
 }) {
   const { handleSubmit, formState, control } = useForm({
     mode: "onSubmit",
@@ -62,7 +63,6 @@ export default function ModalForm({
                 // formState,
               }) => (
                 <SelectBoxComponent
-                  data={exportFormatsData}
                   onChange={onChange}
                   value={value}
                   id={"export-file-format-input"}
@@ -71,7 +71,13 @@ export default function ModalForm({
                   error={!!error}
                   errors={errors.exportfileformat}
                   inputProps={{ "data-testid": "exportfileformat" }}
-                />
+                >
+                {exportFormatsData.map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+                </SelectBoxComponent>
               )}
             />
           </Grid>

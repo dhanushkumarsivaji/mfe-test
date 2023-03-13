@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>3/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>3/7</span>
             </div>
         
             
@@ -112,10 +112,7 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,28 +133,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,7 +162,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@mui/material';
+import { Select, FormControl, InputLabel, FormHelperText } from '@mui/material';
 import { styled } from '@mui/system';
 import { isEmpty } from 'lodash';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -176,21 +170,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const StyledSelectBox = styled(Select)({
 	borderRadius: '0px',
 	background: '#fff',
-    '&amp; .MuiSelect-select': {
-        padding: '12px 14px'
+    '&amp; .container-app-MuiOutlinedInput-input': {
+        padding: '13px 14px'
     }
 });
 &nbsp;
-function <span class="fstat-no" title="function not covered" >SelectBoxComponent(</span>props) {
+function SelectBoxComponent(props) {
     const {
-        data,
         id,
         label,
 		error,
-		errors
-    } = <span class="cstat-no" title="statement not covered" >props</span>
+		errors,
+		children
+    } = props
 &nbsp;
 	function <span class="fstat-no" title="function not covered" >renderErrorMessage(</span>errors){
+<span class="cstat-no" title="statement not covered" >		console.log(errors)</span>
 <span class="cstat-no" title="statement not covered" >		switch (errors.type) {</span>
 			case 'required':
 <span class="cstat-no" title="statement not covered" >				return 'This field is required'</span>
@@ -199,7 +194,7 @@ function <span class="fstat-no" title="function not covered" >SelectBoxComponent
 		}
 	}
     
-<span class="cstat-no" title="statement not covered" >	return (</span>
+	return (
 		&lt;FormControl fullWidth error={error}&gt;
 			&lt;InputLabel htmlFor={id}&gt;{label}&lt;/InputLabel&gt;
 			&lt;StyledSelectBox
@@ -208,13 +203,9 @@ function <span class="fstat-no" title="function not covered" >SelectBoxComponent
 				IconComponent={ExpandMoreIcon}
 				
 			&gt;
-				{data.map(<span class="fstat-no" title="function not covered" >(o</span>ption) =&gt; (
-<span class="cstat-no" title="statement not covered" >					&lt;MenuItem key={option.id} value={option.id}&gt;</span>
-						{option.name}
-					&lt;/MenuItem&gt;
-				))}
+				{children}
 			&lt;/StyledSelectBox&gt;
-			{ !isEmpty(errors) ? &lt;FormHelperText &gt;{renderErrorMessage(errors)}&lt;/FormHelperText&gt; : null}
+			{ !isEmpty(errors) ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;FormHelperText &gt;{renderErrorMessage(errors)}&lt;/FormHelperText&gt; </span>: null}
 		&lt;/FormControl&gt;
 	);
 }
@@ -226,7 +217,7 @@ export default SelectBoxComponent;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-16T06:13:10.073Z
+                at 2023-03-12T12:25:08.410Z
             </div>
         <script src="../prettify.js"></script>
         <script>

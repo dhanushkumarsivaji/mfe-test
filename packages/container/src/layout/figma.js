@@ -8,6 +8,7 @@ import ApplicationGroups from "../components/ApplicationGroup";
 import GreetingText from "../components/GreetingText";
 import Card from "../components/Card";
 import Table from "../container";
+import Form from '../components/company-ranking/form';
 
 const FooterSectionContainer = styled("footer")(() => ({
   fontFamily: "Arial",
@@ -77,12 +78,29 @@ const cardsData = [
   }
 ]
 
+const options = ["USEIC", "IEIC", "GEIC", "BFIC"];
+
+const viewBy = [
+  {
+    value: "View By Assigned",
+    label: "View By Assigned"
+  },
+  {
+    value: "View By Committe",
+    label: "View By Committe"
+  }
+];
+
 const Footer = () => {
   return (
-    <>
+    <React.Fragment>
       <Header />
       <MainSectionContainer>
-      
+        <Form
+        options={options}
+        viewBy={viewBy}
+        valueForSelect={"View By Assigned"}
+        />
         <GreetingText />
         <Table />
         <Grid container spacing={{ xs: 2, md: 2, lg: 4 }} style={{display: 'flex', flexWrap: 'wrap'}}>
@@ -105,7 +123,7 @@ const Footer = () => {
           </Grid>
         </FooterSectionContainer>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
