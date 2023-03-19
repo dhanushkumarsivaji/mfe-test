@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
+import { ThemeProvider } from '@mui/material/styles';
 import { Route, Switch } from "react-router-dom";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import theme from "./styles/themes";
 import { ErrorBoundary } from "react-error-boundary";
 import Favicon from 'react-favicon';
 
@@ -51,6 +53,7 @@ export default () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <ErrorBoundary
       FallbackComponent={ErrorBoundaryComponent}
       onReset={() => {}}
@@ -111,6 +114,7 @@ export default () => {
         </Suspense>
       </div>
     </ErrorBoundary>
+    </ThemeProvider>
   );
 };
 

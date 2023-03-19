@@ -11,7 +11,6 @@ import Table from "../container";
 import Form from '../components/company-ranking/form';
 
 const FooterSectionContainer = styled("footer")(() => ({
-  fontFamily: "Arial",
   color: "white",
   padding: "42px 0 26px 0px",
   lineHeight: "24px",

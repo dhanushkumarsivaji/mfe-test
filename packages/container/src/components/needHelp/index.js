@@ -39,14 +39,12 @@ const SupportLinksItemSectionContainer = styled("div")(() => ({
 
 const StyledTypographyHeader = styled(Typography)(() => ({
   [`&.${typographyClasses.root}`]: {
-    fontSize: "26px",
     fontWeight: "600px",
     marginBottom: "16px",
   },
 }));
 
 const StyledLink = styled(Link)(() => ({
-  fontSize: "16px",
   fontWeight: "400px",
   lineHeight: "16px",
   color: "#3A547C",
@@ -58,7 +56,7 @@ const NeedHelp = () => {
     <Container> 
     <NeedHelpContainer>
       <NeedHelpSectionContainer>
-        <Typography variant="h4" sx={{ fontSize: "26px", fontWeight: "600px" }}>
+        <Typography variant="h4" sx={{ fontWeight: "600px" }}>
           Need help?
         </Typography>
 
@@ -66,11 +64,11 @@ const NeedHelp = () => {
           <StyledTypographyHeader variant="h5">Call</StyledTypographyHeader>
           <Typography
             variant="body1"
-            sx={{ fontSize: "16px", fontWeight: "bold" }}
+            sx={{ fontWeight: "bold" }}
           >
             800-621-3979
           </Typography>
-          <Typography variant="body1" sx={{ fontSize: "16px" }}>
+          <Typography variant="body1">
             M–F, 8 a.m. – 7:30 p.m., ET
           </Typography>
         </div>

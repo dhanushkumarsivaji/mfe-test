@@ -152,13 +152,13 @@ export default function Header({ isSignedIn, onSignOut }) {
                 data-testid="brand-logo"
               />
               <Typography
-                variant="body1"
+                variant="body2"
                 sx={{
                   display: "flex",
                   justifyContent: "end",
-                  fontSize: "12px",
                   margin: "0",
                   color: "black",
+                  fontSize: '12px'
                 }}
               >
                 Enterprise Workstation STG 3.5.0.3

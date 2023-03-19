@@ -23,13 +23,11 @@ const CardComponent = ({ data }) => {
     <ApplicationGroupContainer>
       <ApplicationGroupHeaderIcon />
       <Typography
-        variant="h1"
+        variant="h3"
         sx={{
-          fontSize: "30px",
           fontWeight: 600,
           color: "#222226",
           marginBottom: "16px",
-          fontFamily: "Arial",
         }}
       >
         {" "}
@@ -39,7 +37,6 @@ const CardComponent = ({ data }) => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "16px",
             fontWeight: 700,
             color: "#1C1D21",
             lineHeight: "24px",
@@ -51,7 +48,6 @@ const CardComponent = ({ data }) => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "14px",
             fontWeight: 400,
             color: "#8181A5",
             lineHeight: "20px",

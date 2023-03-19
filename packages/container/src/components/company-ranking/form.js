@@ -134,7 +134,7 @@ const MyForm = ({ valueForSelect, options, viewBy }) => {
             // disabled={!formState.isValid}
             data-testid="submit"
           >
-                  View
+            View
           </ButtonComponent>
         </Grid>
       </Grid>

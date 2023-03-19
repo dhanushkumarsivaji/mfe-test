@@ -62,11 +62,9 @@ export default function ApplicationGroups() {
       <Typography
         variant="h1"
         sx={{
-          fontSize: "30px",
           fontWeight: 600,
           color: "#222226",
           marginBottom: "28px",
-          fontFamily: "Arial",
         }}
       >
         {" "}
@@ -93,8 +91,6 @@ export default function ApplicationGroups() {
                 flexShrink: 0,
                 color: "#474C59",
                 fontWeight: 700,
-                fontSize: "16px",
-                fontFamily: "Arial",
               }}
             >
               {val.title} {`(${val?.links?.length})`}
@@ -103,7 +99,7 @@ export default function ApplicationGroups() {
           <AccordionDetails sx={{ minHeight: "118px" }}>
             <div>
               {val?.links?.map((d, i) => (
-                  <Link component={RouterLink} to={d.link} sx={{margin: '0px 10px', fontSize:'16px', fontFamily:'Arial', color:'#3A547C', lineHeight:'24px', '&:first-of-type': {
+                  <Link component={RouterLink} to={d.link} sx={{margin: '0px 10px', color:'#3A547C', lineHeight:'24px', '&:first-of-type': {
                     marginLeft: '0'
                   }}}>
                     {d.name}

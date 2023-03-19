@@ -39,7 +39,6 @@ const SubCard = () => {
           <Typography
             variant="body1"
             sx={{
-              fontSize: "12px",
               fontWeight: 700,
               color: "#5E81F4",
               lineHeight: "18px",
@@ -61,7 +60,6 @@ const SubCard = () => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "14px",
             fontWeight: 700,
             color: "#1C1D21",
             lineHeight: "24px",
@@ -73,7 +71,6 @@ const SubCard = () => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "12px",
             fontWeight: 400,
             color: "#8181A5",
             lineHeight: "20px",
