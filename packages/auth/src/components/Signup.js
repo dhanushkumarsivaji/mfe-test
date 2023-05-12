@@ -8,11 +8,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {  useHistory } from "react-router-dom";
 
 
 const theme = createTheme();
 
 export default function SignUp({onSignIn}) {
+
+  const history = useHistory()
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,7 +81,7 @@ export default function SignUp({onSignIn}) {
             <Button
               fullWidth
               variant="contained"
-              onClick={() => onSignIn()}
+              onClick={() => history.push('/')}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
