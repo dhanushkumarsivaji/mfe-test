@@ -7,7 +7,6 @@ import Progress from "./components/Progress";
 import NotFound from "./components/NotFound";
 import ErrorBoundaryComponent from "./components/ErrorBoundary";
 
-import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
 
 import { customApiRequest, loginRequest } from "./authConfig";
@@ -15,7 +14,6 @@ import { customApiRequest, loginRequest } from "./authConfig";
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
 const MarketingPage = lazy(() => import("./layout/home"));
 const ProfilePage = lazy(() => import("./layout/profile"));
-const DashboardPage = lazy(() => import("./layout/dashboard"));
 const AccountsPage = lazy(() => import("./layout/accounts"));
 const SecuritiesPage = lazy(() => import("./layout/securities"));
 
@@ -59,35 +57,28 @@ export default () => {
               onSignIn={onSignIn}
               isAuthenticated={isAuthenticated}
             />
-            <PrivateRoute
-              path="/dashboard"
-              component={DashboardPage}
-              role={1001}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <PrivateRoute
+            <PublicRoute
               path="/accounts"
               component={AccountsPage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}
             />
-            <PrivateRoute
+            <PublicRoute
               path="/securities"
               component={SecuritiesPage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}
             />
-            <PrivateRoute
+            <PublicRoute
               path="/profile"
               component={ProfilePage}
               token={"token"}
               isAuthenticated={isAuthenticated}
               acquireToken={acquireToken}
             />
-            <PrivateRoute
+            <PublicRoute
               path="/"
               component={MarketingPage}
               token={"token"}

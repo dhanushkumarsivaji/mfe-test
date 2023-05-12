@@ -29,7 +29,7 @@ export default ({ history, acquireToken }) => {
 
       <Router history={history}>
         <Switch>
-          <Route path="/securities/table" ><Securities data={res} loading={loading}/> </Route>
+          <Route path="/securities/table" ><h1>Securities</h1></Route>
         </Switch>
       </Router>
     </div>

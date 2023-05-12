@@ -40,7 +40,7 @@ export default ({ history, acquireToken }) => {
 
       <Router history={history}>
         <Switch>
-          <Route path="/accounts/table" ><Table data={res} loading={loading}/> </Route>
+          <Route path="/accounts/table" ><h1>Accounts</h1></Route>
           <Route path="/accounts/edit" component={Edit} />
           <Route path="/accounts/user" component={User} />
         </Switch>

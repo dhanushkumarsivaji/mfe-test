@@ -15,14 +15,10 @@ const LINKS = [
     path: "/securities/table",
     name: "Securities",
   },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-  },
+  // {
+  //   path: "/profile",
+  //   name: "Profile",
+  // },
   // {
   //   path: "/dodge/user",
   //   name: "User",
