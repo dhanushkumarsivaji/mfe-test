@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from "react";
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from "@mui/material/styles";
 import { Route, Switch } from "react-router-dom";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import theme from "./styles/themes";
 import { ErrorBoundary } from "react-error-boundary";
-import Favicon from 'react-favicon';
-
+import Favicon from "react-favicon";
+import { MittProvider } from "react-mitt"
 import "devextreme/dist/css/dx.light.css";
 
 import Progress from "./components/Progress";
@@ -16,7 +16,7 @@ import { PrivateRoute } from "./routes/privateRoute";
 import { PublicRoute } from "./routes/publicRoute";
 
 import { customApiRequest, loginRequest } from "./authConfig";
-import LayoutDesign from './layout/figma';
+import LayoutDesign from "./layout/figma";
 
 const AuthPage = lazy(() => import("./components/apps/AuthApp"));
 const MarketingPage = lazy(() => import("./layout/home"));
@@ -24,7 +24,7 @@ const ProfilePage = lazy(() => import("./layout/profile"));
 const DashboardPage = lazy(() => import("./layout/dashboard"));
 const AccountsPage = lazy(() => import("./layout/accounts"));
 const SecuritiesPage = lazy(() => import("./layout/securities"));
-import './index.css'
+import "./index.css";
 
 export default () => {
   const isAuthenticated = useIsAuthenticated();
@@ -41,7 +41,8 @@ export default () => {
       const response = await instance.acquireTokenSilent(request);
       return response.accessToken;
     } catch (e) {
-      instance.acquireTokenPopup(request)
+      instance
+        .acquireTokenPopup(request)
         .then((response_1) => response_1.accessToken);
     }
   };
@@ -53,68 +54,70 @@ export default () => {
   };
 
   return (
+    <MittProvider>
     <ThemeProvider theme={theme}>
-    <ErrorBoundary
-      FallbackComponent={ErrorBoundaryComponent}
-      onReset={() => {}}
-    >
-      <Favicon url="https://www.dodgeandcox.com/etc.clientlibs/dodgeandcox/clientlibs/clientlib-site/resources/images/favicon.ico" />
-      <div>
-        <Suspense fallback={<Progress />}>
-          <Switch>
-            <PublicRoute
-              path="/auth"
-              component={LayoutDesign}
-              onSignIn={onSignIn}
-              isAuthenticated={isAuthenticated}
-            />
-            <PublicRoute
-            path="/figma"
-            component={LayoutDesign}
-            onSignIn={onSignIn}
-            isAuthenticated={isAuthenticated}
-          />
-            <PrivateRoute
-              path="/dashboard"
-              component={DashboardPage}
-              role={1001}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <PrivateRoute
-              path="/accounts"
-              component={AccountsPage}
-              token={"token"}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <PrivateRoute
-              path="/securities"
-              component={SecuritiesPage}
-              token={"token"}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <PrivateRoute
-              path="/profile"
-              component={ProfilePage}
-              token={"token"}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <PrivateRoute
-              path="/"
-              component={MarketingPage}
-              token={"token"}
-              isAuthenticated={isAuthenticated}
-              acquireToken={acquireToken}
-            />
-            <Route path={"*"} component={NotFound} />
-          </Switch>
-        </Suspense>
-      </div>
-    </ErrorBoundary>
+      <ErrorBoundary
+        FallbackComponent={ErrorBoundaryComponent}
+        onReset={() => {}}
+      >
+        <Favicon url="https://www.dodgeandcox.com/etc.clientlibs/dodgeandcox/clientlibs/clientlib-site/resources/images/favicon.ico" />
+        <div>
+          <Suspense fallback={<Progress />}>
+            <Switch>
+              <PublicRoute
+                path="/auth"
+                component={LayoutDesign}
+                onSignIn={onSignIn}
+                isAuthenticated={isAuthenticated}
+              />
+              <PublicRoute
+                path="/figma"
+                component={LayoutDesign}
+                onSignIn={onSignIn}
+                isAuthenticated={isAuthenticated}
+              />
+              <PublicRoute
+                path="/dashboard"
+                component={DashboardPage}
+                role={1001}
+                isAuthenticated={isAuthenticated}
+                acquireToken={acquireToken}
+              />
+              <PrivateRoute
+                path="/accounts"
+                component={AccountsPage}
+                token={"token"}
+                isAuthenticated={isAuthenticated}
+                acquireToken={acquireToken}
+              />
+              <PrivateRoute
+                path="/securities"
+                component={SecuritiesPage}
+                token={"token"}
+                isAuthenticated={isAuthenticated}
+                acquireToken={acquireToken}
+              />
+              <PrivateRoute
+                path="/profile"
+                component={ProfilePage}
+                token={"token"}
+                isAuthenticated={isAuthenticated}
+                acquireToken={acquireToken}
+              />
+              <PublicRoute
+                path="/"
+                component={MarketingPage}
+                token={"token"}
+                isAuthenticated={isAuthenticated}
+                acquireToken={acquireToken}
+              />
+              <Route path={"*"} component={NotFound} />
+            </Switch>
+          </Suspense>
+        </div>
+      </ErrorBoundary>
     </ThemeProvider>
+    </MittProvider>
   );
 };
 
@@ -139,7 +142,6 @@ export default () => {
 //   "galleryEndpointUrl": "https://gallery.azure.com/",
 //   "managementEndpointUrl": "https://management.core.windows.net/"
 // }
-
 
 //AKIASNSUKHU2U3PVIPHT
 //B4xq8UDNwN/9vjTP9hy/EGS1vRliqLWfsFgMVDGc

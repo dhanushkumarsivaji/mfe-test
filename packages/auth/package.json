@@ -6,9 +6,6 @@
     "build": "webpack --config config/webpack.prod.js"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^5.3.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
@@ -19,9 +16,14 @@
     "@tanstack/react-table": "^8.7.4",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
+    "mitt": "^1.0.1",
     "moment": "^2.29.4",
+    "react": "^18.2.0",
     "react-csv": "^2.2.2",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.5",
+    "react-mitt": "^1.0.1",
+    "react-router-dom": "^5.3.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

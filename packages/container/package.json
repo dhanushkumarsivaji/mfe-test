@@ -22,6 +22,7 @@
     "@tanstack/match-sorter-utils": "^8.7.2",
     "@tanstack/react-table": "^8.7.4",
     "axios": "^1.2.2",
+    "component-library-dc": "^1.0.2",
     "devextreme": "^22.2.3",
     "devextreme-react": "^22.2.3",
     "dotenv-webpack": "^8.0.1",
@@ -30,6 +31,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "lodash": "^4.17.21",
+    "mitt": "^1.0.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-csv": "^2.2.2",
@@ -37,7 +39,9 @@
     "react-error-boundary": "^3.1.4",
     "react-favicon": "^1.0.1",
     "react-hook-form": "^7.43.1",
+    "react-mitt": "^1.0.1",
     "react-router-dom": "^5.3.3",
+    "ui-lib": "github:dhanushkumarsivaji/react-library-using-webpack",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
@@ -85,5 +89,8 @@
         }
       }
     ]
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { MittProvider } from "react-mitt"
 import Landing from './components/Landing';
 import Products from './components/Products';
 import User from './components/User';
@@ -17,7 +18,7 @@ export default ({ history }) => {
   },[])
 
   return (
-    <div>
+    <MittProvider>
         <Router history={history}>
           <Switch>
             <Route path="/products" component={Products} />
@@ -25,7 +26,7 @@ export default ({ history }) => {
             <Route path="/" component={Landing} />
           </Switch>
         </Router>
-    </div>
+    </MittProvider>
   );
 };
 

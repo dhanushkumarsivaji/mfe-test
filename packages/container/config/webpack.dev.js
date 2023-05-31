@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const path = require('path');
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
@@ -9,7 +10,7 @@ const devConfig = {
     publicPath: 'http://localhost:3000/',
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     port: 3000,

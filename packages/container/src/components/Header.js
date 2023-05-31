@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { useMitt } from 'react-mitt'
 
 import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -17,7 +18,7 @@ import ListSVG from "../assets/list";
 import QuestionSVG from "../assets/question";
 import SearchSVG from "../assets/search";
 import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
+import AcUnit from "@mui/icons-material/AcUnit";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { loginRequest } from '../authConfig';
@@ -135,6 +136,14 @@ export default function Header({ isSignedIn, onSignOut }) {
     },
   ];
 
+  const { emitter } = useMitt()
+
+  const handleEmitClick = () => {
+    console.log("I am called")
+    emitter.emit('foo', { data: 'ComponentA says foo!'})
+
+  }
+
   return (
     <React.Fragment>
       <AppBar
@@ -212,6 +221,15 @@ export default function Header({ isSignedIn, onSignOut }) {
                     </IconButton>
                   </Tooltip>
                 )}
+                <IconButton  disableFocusRipple disableRipple sx={{color: 'rgb(58, 84, 124)'}} onClick={() => handleEmitClick()}>
+                <AcUnit
+                  sx={{
+                    width: "24px",
+                    height: "24px",
+                    marginBottom: "14px",
+                  }}
+                />
+              </IconButton>
               </span>
             </IconsContainer>
           </ContentContainer>

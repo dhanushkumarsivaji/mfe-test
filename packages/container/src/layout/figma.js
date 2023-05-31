@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import { useMitt } from 'react-mitt'
+import { Button, Table } from 'component-library-dc'
+
 import Logo from "../assets/footer-logo.png";
 import Header from "../components/Header";
 import NeedHelp from "../components/needHelp";
+
 import ApplicationGroups from "../components/ApplicationGroup";
 import GreetingText from "../components/GreetingText";
 import Card from "../components/Card";
-import Table from "../container";
+import { customers } from "../container/data";
 import Form from '../components/company-ranking/form';
+import ButtonComponent from "../components/Button";
 
 const FooterSectionContainer = styled("footer")(() => ({
   color: "white",
@@ -91,17 +96,26 @@ const viewBy = [
 ];
 
 const Footer = () => {
+
+  // const { emitter } = useMitt()
+ 
+  // useEffect(() => {
+  //   // listen and respond to 'foo' events
+  //   emitter.on('foo', event => alert(event.data))
+  // }, [])
+
   return (
     <React.Fragment>
       <Header />
       <MainSectionContainer>
+      <Button variant="contained">Hello Dhanush</Button>
         <Form
         options={options}
         viewBy={viewBy}
         valueForSelect={"View By Assigned"}
         />
         <GreetingText />
-        <Table />
+        <Table data={customers}/>
         <Grid container spacing={{ xs: 2, md: 2, lg: 4 }} style={{display: 'flex', flexWrap: 'wrap'}}>
           {cardsData.map((val, index) => (
             <Grid item xs={12} sm={12} md={4} key={index} >
